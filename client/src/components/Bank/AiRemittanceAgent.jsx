@@ -38,14 +38,14 @@ const AiRemittanceAgent = ({ user: initialUser, refreshData }) => {
     } else {
       getCachedUserDetail()
         .then(user => setCurrentUser(user))
-        .catch(() => {});
+        .catch(() => { });
     }
   }, [initialUser]);
 
   const handlePointerDown = (e) => {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    
+
     dragRef.current = {
       isDragging: false,
       startX: clientX,
@@ -151,7 +151,7 @@ const AiRemittanceAgent = ({ user: initialUser, refreshData }) => {
     setIsTyping(true);
 
     try {
-      const response = await api.post('/agent/chat', { message: userMessage.text, timezoneOffset: new Date().getTimezoneOffset() });
+      const response = await api.post('/agent/chat', { message: userMessage.text });
       const { reply, executedTool, toolResult } = response.data || {};
 
       setIsTyping(false);

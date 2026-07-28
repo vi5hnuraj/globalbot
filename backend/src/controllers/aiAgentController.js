@@ -2,14 +2,9 @@ import { toolDefinitions, executeTool } from '../services/toolRegistry.js';
 
 export const handleAgentChat = async (req, res) => {
   try {
-    const { message, timezoneOffset } = req.body;
+    const { message } = req.body;
     const user = req.user;
     const accessToken = req.header('Authorization')?.replace('Bearer ', '');
-
-    // timezoneOffset from JS Date.getTimezoneOffset(): minutes WEST of UTC
-    // e.g. IST = -330 (330 min east, so JS returns -330)
-    // To convert local-intended time to UTC, we ADD timezoneOffset minutes
-    const tzOffsetMinutes = typeof timezoneOffset === 'number' ? timezoneOffset : 0;
 
     if (!message || !message.trim()) {
       return res.status(400).json({ message: "Message content is required" });
@@ -111,10 +106,7 @@ Never output raw code. Choose the best matching tool to execute backend actions.
 
       const parseScheduleDate = (str) => {
         const lower = str.toLowerCase();
-        // Use the client's UTC offset to create a "local now" on the server.
-        // tzOffsetMinutes is JS Date.getTimezoneOffset() — minutes WEST of UTC (negative for east).
-        // Server is UTC, so we shift 'now' by -tzOffsetMinutes to get client local time.
-        const now = new Date(Date.now() - tzOffsetMinutes * 60 * 1000);
+        const now = new Date();
 
         const parseTime = (str) => {
           const m = str.match(/(\d{1,2})(?:[:.](\d{2}))?\s*(am|pm)?/i);
@@ -232,88 +224,88 @@ Never output raw code. Choose the best matching tool to execute backend actions.
         aiResponseText = toolCallResult.message;
       } else
 
-      // Non-payment intents must be evaluated before the generic `pay`
-      // branch: "schedule a payment" previously executed as a send.
-      if (lower.includes('balance') || lower.includes('how much')) {
-        executedTool = 'checkBalance';
-        toolCallResult = await executeTool('checkBalance', {}, user, accessToken);
-        aiResponseText = toolCallResult.message;
-      } else if (lower.includes('transaction') || lower.includes('history') || lower.includes('activity')) {
-        executedTool = 'getTransactionHistory';
-        toolCallResult = await executeTool('getTransactionHistory', {}, user, accessToken);
-        aiResponseText = toolCallResult.message;
-      } else if (lower.includes('cancel')) {
-        executedTool = 'cancelSchedulePayment';
-        toolCallResult = await executeTool('cancelSchedulePayment', {}, user, accessToken);
-        aiResponseText = toolCallResult.message;
-      } else if (lower.includes('schedule')) {
-        const amount = extractAmount(message);
-        const recipient = extractTag(message);
-        const date = parseScheduleDate(message);
-        if (!recipient || amount <= 0) {
-          aiResponseText = '💡 Use: Schedule 1 BOT to @username tomorrow at 3pm.';
-        } else if (!date && (/(?:at|by|for)\s+\d/i.test(message) || /\d\s*(?:am|pm)/i.test(message))) {
-          aiResponseText = '🤔 I found a time in your message but couldn\'t understand the date. Try: "Schedule 1 BOT to @username today at 5pm" or "tomorrow at 3pm".';
-        } else {
-          executedTool = 'schedulePayment';
-          toolCallResult = await executeTool('schedulePayment', { recipient, amount, date }, user, accessToken);
+        // Non-payment intents must be evaluated before the generic `pay`
+        // branch: "schedule a payment" previously executed as a send.
+        if (lower.includes('balance') || lower.includes('how much')) {
+          executedTool = 'checkBalance';
+          toolCallResult = await executeTool('checkBalance', {}, user, accessToken);
           aiResponseText = toolCallResult.message;
-        }
-      } else if (lower.includes('invoice')) {
-        const amount = extractAmount(message);
-        const recipient = extractTag(message);
-        aiResponseText = (!recipient || amount <= 0)
-          ? '💡 Use: Create invoice 50 USD for @username.'
-          : (executedTool = 'createInvoice', toolCallResult = await executeTool('createInvoice', { amount, recipient, currency: extractCurrency(message) }, user, accessToken), toolCallResult.message);
-      } else if (lower.includes('rate') || lower.includes('price') || lower.includes('how much is bot') || lower.includes('bot price')) {
-        executedTool = 'getRate';
-        toolCallResult = await executeTool('getRate', {}, user, accessToken);
-        aiResponseText = toolCallResult.message;
-      } else if (lower.includes('wallet') || lower.includes('address') || (lower.includes('my') && lower.includes('wallet'))) {
-        executedTool = 'getWallet';
-        toolCallResult = await executeTool('getWallet', {}, user, accessToken);
-        aiResponseText = toolCallResult.message;
-      } else if (lower.includes('primary') || lower.includes('switch') || lower.includes('toggle')) {
-        const target = lower.includes('external') ? 'external' : lower.includes('internal') ? 'internal' : undefined;
-        executedTool = 'switchPrimary';
-        toolCallResult = await executeTool('switchPrimary', { target }, user, accessToken);
-        aiResponseText = toolCallResult.message;
-      } else if (lower.includes('help') || lower.includes('what can you') || lower.includes('commands') || lower.includes('/help')) {
-        executedTool = 'getHelp';
-        toolCallResult = await executeTool('getHelp', {}, user, accessToken);
-        aiResponseText = toolCallResult.message;
-      } else if (lower.includes('find') || lower.includes('search') || lower.startsWith('who is')) {
-        const query = extractTag(message) || message.replace(/^\/?(find|search|who is)\s*/i, '').trim();
-        aiResponseText = !query
-          ? '🔍 Please include a PayTag, email, or name—for example: Find user @alice.'
-          : (executedTool = 'findUser', toolCallResult = await executeTool('findUser', { query }, user, accessToken), toolCallResult.message);
-      } else if (lower.includes('send') || lower.includes('transfer') || lower.includes('pay')) {
-        const amount = extractAmount(message);
-        const recipient = extractTag(message);
+        } else if (lower.includes('transaction') || lower.includes('history') || lower.includes('activity')) {
+          executedTool = 'getTransactionHistory';
+          toolCallResult = await executeTool('getTransactionHistory', {}, user, accessToken);
+          aiResponseText = toolCallResult.message;
+        } else if (lower.includes('cancel')) {
+          executedTool = 'cancelSchedulePayment';
+          toolCallResult = await executeTool('cancelSchedulePayment', {}, user, accessToken);
+          aiResponseText = toolCallResult.message;
+        } else if (lower.includes('schedule')) {
+          const amount = extractAmount(message);
+          const recipient = extractTag(message);
+          const date = parseScheduleDate(message);
+          if (!recipient || amount <= 0) {
+            aiResponseText = '💡 Use: Schedule 1 BOT to @username tomorrow at 3pm.';
+          } else if (!date && (/(?:at|by|for)\s+\d/i.test(message) || /\d\s*(?:am|pm)/i.test(message))) {
+            aiResponseText = '🤔 I found a time in your message but couldn\'t understand the date. Try: "Schedule 1 BOT to @username today at 5pm" or "tomorrow at 3pm".';
+          } else {
+            executedTool = 'schedulePayment';
+            toolCallResult = await executeTool('schedulePayment', { recipient, amount, date }, user, accessToken);
+            aiResponseText = toolCallResult.message;
+          }
+        } else if (lower.includes('invoice')) {
+          const amount = extractAmount(message);
+          const recipient = extractTag(message);
+          aiResponseText = (!recipient || amount <= 0)
+            ? '💡 Use: Create invoice 50 USD for @username.'
+            : (executedTool = 'createInvoice', toolCallResult = await executeTool('createInvoice', { amount, recipient, currency: extractCurrency(message) }, user, accessToken), toolCallResult.message);
+        } else if (lower.includes('rate') || lower.includes('price') || lower.includes('how much is bot') || lower.includes('bot price')) {
+          executedTool = 'getRate';
+          toolCallResult = await executeTool('getRate', {}, user, accessToken);
+          aiResponseText = toolCallResult.message;
+        } else if (lower.includes('wallet') || lower.includes('address') || (lower.includes('my') && lower.includes('wallet'))) {
+          executedTool = 'getWallet';
+          toolCallResult = await executeTool('getWallet', {}, user, accessToken);
+          aiResponseText = toolCallResult.message;
+        } else if (lower.includes('primary') || lower.includes('switch') || lower.includes('toggle')) {
+          const target = lower.includes('external') ? 'external' : lower.includes('internal') ? 'internal' : undefined;
+          executedTool = 'switchPrimary';
+          toolCallResult = await executeTool('switchPrimary', { target }, user, accessToken);
+          aiResponseText = toolCallResult.message;
+        } else if (lower.includes('help') || lower.includes('what can you') || lower.includes('commands') || lower.includes('/help')) {
+          executedTool = 'getHelp';
+          toolCallResult = await executeTool('getHelp', {}, user, accessToken);
+          aiResponseText = toolCallResult.message;
+        } else if (lower.includes('find') || lower.includes('search') || lower.startsWith('who is')) {
+          const query = extractTag(message) || message.replace(/^\/?(find|search|who is)\s*/i, '').trim();
+          aiResponseText = !query
+            ? '🔍 Please include a PayTag, email, or name—for example: Find user @alice.'
+            : (executedTool = 'findUser', toolCallResult = await executeTool('findUser', { query }, user, accessToken), toolCallResult.message);
+        } else if (lower.includes('send') || lower.includes('transfer') || lower.includes('pay')) {
+          const amount = extractAmount(message);
+          const recipient = extractTag(message);
 
-        if (amount <= 0) {
-          aiResponseText = '💡 Please enter an amount greater than zero.';
-        } else if (lower.includes('qr') && !recipient) {
-          aiResponseText = '📷 Please scan a QR code in the QR payment screen, or paste a valid QR PayTag/payload.';
-        } else if (!recipient && !lower.includes('merchant') && !lower.includes('starbucks') && !lower.includes('amazon')) {
-          aiResponseText = '💡 Include a recipient PayTag—for example: Send 5 BOT to @username.';
-        } else if (lower.includes('merchant') || lower.includes('starbucks') || lower.includes('amazon')) {
-          const merchantMatch = message.match(/(?:starbucks|amazon|walmart)/i);
-          executedTool = 'payMerchant';
-          toolCallResult = await executeTool('payMerchant', { merchant: merchantMatch ? merchantMatch[0] : 'Merchant', amount }, user, accessToken);
-          aiResponseText = toolCallResult.message;
-        } else if (lower.includes('qr')) {
-          executedTool = 'payQR';
-          toolCallResult = await executeTool('payQR', { qrData: recipient, amount }, user, accessToken);
-          aiResponseText = toolCallResult.message;
-        } else {
-          executedTool = 'sendBot';
-          toolCallResult = await executeTool('sendBot', { recipient, amount }, user, accessToken);
-          aiResponseText = toolCallResult.message;
+          if (amount <= 0) {
+            aiResponseText = '💡 Please enter an amount greater than zero.';
+          } else if (lower.includes('qr') && !recipient) {
+            aiResponseText = '📷 Please scan a QR code in the QR payment screen, or paste a valid QR PayTag/payload.';
+          } else if (!recipient && !lower.includes('merchant') && !lower.includes('starbucks') && !lower.includes('amazon')) {
+            aiResponseText = '💡 Include a recipient PayTag—for example: Send 5 BOT to @username.';
+          } else if (lower.includes('merchant') || lower.includes('starbucks') || lower.includes('amazon')) {
+            const merchantMatch = message.match(/(?:starbucks|amazon|walmart)/i);
+            executedTool = 'payMerchant';
+            toolCallResult = await executeTool('payMerchant', { merchant: merchantMatch ? merchantMatch[0] : 'Merchant', amount }, user, accessToken);
+            aiResponseText = toolCallResult.message;
+          } else if (lower.includes('qr')) {
+            executedTool = 'payQR';
+            toolCallResult = await executeTool('payQR', { qrData: recipient, amount }, user, accessToken);
+            aiResponseText = toolCallResult.message;
+          } else {
+            executedTool = 'sendBot';
+            toolCallResult = await executeTool('sendBot', { recipient, amount }, user, accessToken);
+            aiResponseText = toolCallResult.message;
+          }
+        } else if (!aiResponseText) {
+          aiResponseText = "👋 Hi! I'm your GlobalPay AI Agent. I can execute commands for you! Try:\n• 'Send 25 BOT to @alice'\n• 'Show my balance'\n• 'Show my transactions'\n• 'What's the BOT price?'\n• 'Show my wallet'\n• 'Switch to external wallet'\n• 'Schedule 5 BOT to @bob tomorrow at 3pm'\n• 'Create invoice 50 BOT'\n• 'Help'";
         }
-      } else if (!aiResponseText) {
-        aiResponseText = "👋 Hi! I'm your GlobalPay AI Agent. I can execute commands for you! Try:\n• 'Send 25 BOT to @alice'\n• 'Show my balance'\n• 'Show my transactions'\n• 'What's the BOT price?'\n• 'Show my wallet'\n• 'Switch to external wallet'\n• 'Schedule 5 BOT to @bob tomorrow at 3pm'\n• 'Create invoice 50 BOT'\n• 'Help'";
-      }
     }
 
     return res.status(200).json({
