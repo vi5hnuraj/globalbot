@@ -11,7 +11,6 @@ import moneyTransferRoutes from './src/routes/moneyTransferRoutes.js';
 import payRoutes from './src/routes/pay.js'; // ✅ Import new pay route
 import paymentRoutes from './src/routes/payment.js';
 import aiAgentRoutes from './src/routes/aiAgentRoutes.js'; // ✅ AI Tool Calling Agent
-import { supabase } from './src/config/supabaseClient.js';
 
 import rateLimit from 'express-rate-limit';
 import { idempotencyMiddleware } from './src/middleware/idempotencyMiddleware.js';
@@ -113,23 +112,6 @@ startScheduledPaymentWorker();
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   next();
-});
-
-// ✅ Temporary Debug Route
-app.get('/api/debug-db', async (req, res) => {
-  try {
-    const { data: samples, error: err } = await supabase
-      .from('profiles')
-      .select('name, email, global_pay_tag')
-      .limit(10);
-    res.json({
-      supabaseUrl: process.env.SUPABASE_URL ? process.env.SUPABASE_URL.replace(/(.*:\/\/)(.*)/, "$1***") : "undefined",
-      error: err ? err.message : null,
-      samples
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
 });
 
 // ✅ Routes
