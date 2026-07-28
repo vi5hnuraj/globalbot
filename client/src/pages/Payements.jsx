@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { FiSend, FiDollarSign, FiInbox } from 'react-icons/fi';
 import Pay from '../components/Pay';
 import Request from './Request';
 import RequestForm from '../components/RequestForm';
 
+const tabs = [
+  { key: 'pay', label: 'Pay', icon: FiSend },
+  { key: 'send-request', label: 'Request', icon: FiDollarSign },
+  { key: 'reqpay', label: 'Inbox', icon: FiInbox },
+];
+
 const Payements = () => {
     const [searchParams] = useSearchParams();
-    // Default to "pay" if redirecting from request, otherwise use initial state or URL config
     const [active, setActive] = useState(searchParams.get("tab") || (searchParams.get("prefillFromRequest") ? "pay" : "pay"));
 
     useEffect(() => {
@@ -17,36 +23,27 @@ const Payements = () => {
         }
     }, [searchParams]);
 
-    const toggleHandler = (paymentType) => {
-        setActive(paymentType);
-    }
-
-    const activeClass = "bg-blue-600 text-white border-blue-500 shadow-[0_0_20px_rgba(37,99,235,0.3)]";
-    const inactiveClass = "bg-zinc-900/50 text-zinc-400 border-zinc-800 hover:bg-zinc-800 hover:text-white";
-
     return (
         <div className='flex flex-col bg-black w-full text-white border-t border-zinc-800 min-h-screen overflow-y-auto'>
-            <div className='w-full max-w-4xl mx-auto flex px-3 sm:px-8 py-4 sm:py-8 gap-2 sm:gap-6 text-[10px] sm:text-sm font-bold uppercase tracking-widest'>
-                <div 
-                    onClick={() => toggleHandler("pay")} 
-                    className={`flex-1 sm:flex-none flex justify-center border px-3 sm:px-6 py-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all cursor-pointer whitespace-nowrap ${active === "pay" ? activeClass : inactiveClass}`}
-                >
-                    Pay
-                </div>
-                <div 
-                    onClick={() => toggleHandler("send-request")} 
-                    className={`flex-1 sm:flex-none flex justify-center border px-3 sm:px-6 py-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all cursor-pointer whitespace-nowrap ${active === "send-request" ? activeClass : inactiveClass}`}
-                >
-                    Request
-                </div>
-                <div 
-                    onClick={() => toggleHandler("reqpay")} 
-                    className={`flex-1 sm:flex-none flex justify-center border px-3 sm:px-6 py-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all cursor-pointer whitespace-nowrap ${active === "reqpay" ? activeClass : inactiveClass}`}
-                >
-                    Inbox
-                </div>
+            <div className='w-full max-w-4xl mx-auto px-3 sm:px-8 pt-4 sm:pt-8 pb-0'>
+              <div className='flex gap-1 sm:gap-2 bg-zinc-900/60 p-1.5 rounded-2xl border border-zinc-800/60'>
+                {tabs.map(({ key, label, icon: Icon }) => (
+                  <div
+                    key={key}
+                    onClick={() => setActive(key)}
+                    className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold uppercase tracking-widest transition-all cursor-pointer ${
+                      active === key
+                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
+                        : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50'
+                    }`}
+                  >
+                    <Icon size={15} className="sm:w-4 sm:h-4" />
+                    {label}
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className='h-full flex justify-center px-4'>
+            <div className='flex justify-center px-3 sm:px-4 pt-6 sm:pt-8 pb-8'>
                 {active === "pay" && <Pay />}
                 {active === "send-request" && <RequestForm />}
                 {active === "reqpay" && <Request />}
