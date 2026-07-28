@@ -2,9 +2,14 @@ import { toolDefinitions, executeTool } from '../services/toolRegistry.js';
 
 export const handleAgentChat = async (req, res) => {
   try {
-    const { message } = req.body;
+    const { message, timezoneOffset } = req.body;
     const user = req.user;
     const accessToken = req.header('Authorization')?.replace('Bearer ', '');
+
+    // timezoneOffset from JS Date.getTimezoneOffset(): minutes WEST of UTC
+    // e.g. IST = -330 (330 min east, so JS returns -330)
+    // To convert local-intended time to UTC, we ADD timezoneOffset minutes
+    const tzOffsetMinutes = typeof timezoneOffset === 'number' ? timezoneOffset : 0;
 
     if (!message || !message.trim()) {
       return res.status(400).json({ message: "Message content is required" });
@@ -106,7 +111,10 @@ Never output raw code. Choose the best matching tool to execute backend actions.
 
       const parseScheduleDate = (str) => {
         const lower = str.toLowerCase();
-        const now = new Date();
+        // Use the client's UTC offset to create a "local now" on the server.
+        // tzOffsetMinutes is JS Date.getTimezoneOffset() — minutes WEST of UTC (negative for east).
+        // Server is UTC, so we shift 'now' by -tzOffsetMinutes to get client local time.
+        const now = new Date(Date.now() - tzOffsetMinutes * 60 * 1000);
 
         const parseTime = (str) => {
           const m = str.match(/(\d{1,2})(?:[:.](\d{2}))?\s*(am|pm)?/i);

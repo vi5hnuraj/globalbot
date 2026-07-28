@@ -151,7 +151,7 @@ const AiRemittanceAgent = ({ user: initialUser, refreshData }) => {
     setIsTyping(true);
 
     try {
-      const response = await api.post('/agent/chat', { message: userMessage.text });
+      const response = await api.post('/agent/chat', { message: userMessage.text, timezoneOffset: new Date().getTimezoneOffset() });
       const { reply, executedTool, toolResult } = response.data || {};
 
       setIsTyping(false);

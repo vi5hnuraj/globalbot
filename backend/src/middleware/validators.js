@@ -186,7 +186,8 @@ export const recoverStuckFundingSchema = Joi.object({
 
 // ==================== AI Agent Schema ====================
 export const agentChatSchema = Joi.object({
-  message: Joi.string().min(1).max(2000).trim().required()
+  message: Joi.string().min(1).max(2000).trim().required(),
+  timezoneOffset: Joi.number().integer().min(-840).max(840).optional()
 });
 
 // ==================== Checkout Schema ====================
