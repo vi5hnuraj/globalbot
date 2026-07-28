@@ -358,7 +358,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary text-white p-4 md:p-8 font-sans selection:bg-secondary/30">
+    <div className="min-h-screen bg-primary text-white p-3 sm:p-4 md:p-8 font-sans selection:bg-secondary/30">
       <div className="max-w-[1600px] mx-auto space-y-10">
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 px-2">
@@ -482,27 +482,28 @@ const Dashboard = () => {
           </div>
 
           <div className="bg-zinc-900/30 backdrop-blur-md border border-zinc-800/50 rounded-[2.5rem] overflow-hidden shadow-2xl">
-            <table className="w-full text-left border-collapse">
+            <div className="overflow-x-auto -mx-4 sm:mx-0">
+            <table className="w-full text-left border-collapse min-w-[700px]">
               <thead>
                 <tr className="bg-zinc-900/50 border-b border-zinc-800/50">
-                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-zinc-500">Receiver / PayTag</th>
-                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-zinc-500">Amount Sent</th>
-                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-zinc-500">Asset / Coin</th>
-                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-zinc-500">Timestamp</th>
-                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-zinc-500 text-center">Receipt Key</th>
-                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-zinc-500 text-right">Verification</th>
+                  <th className="px-4 sm:px-8 py-4 sm:py-6 text-[10px] font-black uppercase tracking-widest text-zinc-500">Receiver / PayTag</th>
+                  <th className="px-4 sm:px-8 py-4 sm:py-6 text-[10px] font-black uppercase tracking-widest text-zinc-500">Amount Sent</th>
+                  <th className="px-4 sm:px-8 py-4 sm:py-6 text-[10px] font-black uppercase tracking-widest text-zinc-500">Asset / Coin</th>
+                  <th className="px-4 sm:px-8 py-4 sm:py-6 text-[10px] font-black uppercase tracking-widest text-zinc-500">Timestamp</th>
+                  <th className="px-4 sm:px-8 py-4 sm:py-6 text-[10px] font-black uppercase tracking-widest text-zinc-500 text-center">Receipt Key</th>
+                  <th className="px-4 sm:px-8 py-4 sm:py-6 text-[10px] font-black uppercase tracking-widest text-zinc-500 text-right">Verification</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-800/30">
                 {loading ? (
                   [...Array(5)].map((_, i) => (
                     <tr key={`skeleton-${i}`} className="animate-pulse border-b border-zinc-800/30">
-                      <td className="px-8 py-6"><div className="h-10 w-32 bg-zinc-800/50 rounded-xl"></div></td>
-                      <td className="px-8 py-6"><div className="h-5 w-16 bg-zinc-800/50 rounded-md"></div></td>
-                      <td className="px-8 py-6"><div className="h-5 w-16 bg-zinc-800/50 rounded-full"></div></td>
-                      <td className="px-8 py-6"><div className="h-4 w-20 bg-zinc-800/50 rounded-md"></div></td>
-                      <td className="px-8 py-6"><div className="h-8 w-8 bg-zinc-800/50 rounded-lg mx-auto"></div></td>
-                      <td className="px-8 py-6 text-right"><div className="h-8 w-20 bg-zinc-800/50 rounded-xl ml-auto"></div></td>
+                      <td className="px-4 sm:px-8 py-4 sm:py-6"><div className="h-10 w-32 bg-zinc-800/50 rounded-xl"></div></td>
+                      <td className="px-4 sm:px-8 py-4 sm:py-6"><div className="h-5 w-16 bg-zinc-800/50 rounded-md"></div></td>
+                      <td className="px-4 sm:px-8 py-4 sm:py-6"><div className="h-5 w-16 bg-zinc-800/50 rounded-full"></div></td>
+                      <td className="px-4 sm:px-8 py-4 sm:py-6"><div className="h-4 w-20 bg-zinc-800/50 rounded-md"></div></td>
+                      <td className="px-4 sm:px-8 py-4 sm:py-6"><div className="h-8 w-8 bg-zinc-800/50 rounded-lg mx-auto"></div></td>
+                      <td className="px-4 sm:px-8 py-4 sm:py-6 text-right"><div className="h-8 w-20 bg-zinc-800/50 rounded-xl ml-auto"></div></td>
                     </tr>
                   ))
                 ) : transactions.length === 0 ? (
@@ -510,36 +511,36 @@ const Dashboard = () => {
                 ) : (
                   transactions.slice(0, 10).map((t) => (
                     <tr key={t._id} className="group hover:bg-white/[0.01] transition-colors">
-                      <td className="px-8 py-6">
-                        <div className="flex items-center gap-4">
-                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${t.isOutgoing ? 'border-orange-500/20 text-orange-400' : 'border-emerald-500/20 text-emerald-400'}`}>
-                            {t.isOutgoing ? <FiArrowUpRight size={16} /> : <FiArrowDownLeft size={16} />}
+                      <td className="px-4 sm:px-8 py-4 sm:py-6">
+                        <div className="flex items-center gap-2 sm:gap-4">
+                          <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center border ${t.isOutgoing ? 'border-orange-500/20 text-orange-400' : 'border-emerald-500/20 text-emerald-400'}`}>
+                            {t.isOutgoing ? <FiArrowUpRight size={14} /> : <FiArrowDownLeft size={14} />}
                           </div>
                           <div>
-                            <p className="text-white font-bold text-sm tracking-tight">{t.receiverId || 'Unknown'}</p>
+                            <p className="text-white font-bold text-xs sm:text-sm tracking-tight">{t.receiverId || 'Unknown'}</p>
                             <p className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mt-0.5">{t.type}</p>
                           </div>
                         </div>
                       </td>
-                      <td className="px-8 py-6">
-                        <p className={`text-base font-black ${t.isOutgoing ? 'text-white' : 'text-emerald-400'}`}>
+                      <td className="px-4 sm:px-8 py-4 sm:py-6">
+                        <p className={`text-sm sm:text-base font-black ${t.isOutgoing ? 'text-white' : 'text-emerald-400'}`}>
                           {t.isOutgoing ? '-' : '+'}{t.amountDisplay}
                         </p>
                       </td>
-                      <td className="px-8 py-6">
-                        <span className={`px-3 py-1 bg-zinc-900 border rounded-full text-[9px] font-black uppercase tracking-widest ${t.coin === 'BOT' ? 'text-secondary border-secondary/20' : 'text-cyan-400 border-cyan-500/20'}`}>
+                      <td className="px-4 sm:px-8 py-4 sm:py-6">
+                        <span className={`px-2 sm:px-3 py-1 bg-zinc-900 border rounded-full text-[9px] font-black uppercase tracking-widest ${t.coin === 'BOT' ? 'text-secondary border-secondary/20' : 'text-cyan-400 border-cyan-500/20'}`}>
                           {t.coin}
                         </span>
                       </td>
-                      <td className="px-8 py-6">
-                        <p className="text-zinc-500 text-xs font-medium">{moment(t.timestamp).format('MMM DD, HH:mm')}</p>
+                      <td className="px-4 sm:px-8 py-4 sm:py-6">
+                        <p className="text-zinc-500 text-[10px] sm:text-xs font-medium">{moment(t.timestamp).format('MMM DD, HH:mm')}</p>
                       </td>
-                      <td className="px-8 py-6">
+                      <td className="px-4 sm:px-8 py-4 sm:py-6">
                         <div className="flex justify-center">
-                          <QRCode id={`qr-code-${t._id}`} value={JSON.stringify(t)} size={32} bgColor="transparent" fgColor="#6b21a8" />
+                          <QRCode id={`qr-code-${t._id}`} value={JSON.stringify(t)} size={28} bgColor="transparent" fgColor="#6b21a8" />
                         </div>
                       </td>
-                      <td className="px-8 py-6 text-right">
+                      <td className="px-4 sm:px-8 py-4 sm:py-6 text-right">
                         {t.txHash ? (
                           <a
                             href={`${import.meta.env.VITE_BOTCHAIN_EXPLORER_URL || 'https://scan.botchain.ai/'}/tx/${t.txHash}`}
@@ -558,6 +559,7 @@ const Dashboard = () => {
                 )}
               </tbody>
             </table>
+            </div>
           </div>
         </div>
       </div>

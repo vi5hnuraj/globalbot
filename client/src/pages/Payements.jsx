@@ -26,7 +26,7 @@ const Payements = () => {
 
     return (
         <div className='flex flex-col bg-black w-full text-white border-t border-zinc-800 h-screen overflow-y-auto'>
-            <div className='w-full max-w-4xl mx-auto flex px-8 py-8 gap-6 text-sm font-bold uppercase tracking-widest'>
+            <div className='w-full max-w-4xl mx-auto flex flex-wrap px-4 sm:px-8 py-6 sm:py-8 gap-3 sm:gap-6 text-[10px] sm:text-sm font-bold uppercase tracking-widest'>
                 <div 
                     onClick={() => toggleHandler("pay")} 
                     className={`w-full flex justify-center border p-4 rounded-2xl transition-all cursor-pointer ${active === "pay" ? activeClass : inactiveClass}`}

@@ -12,15 +12,15 @@ const RegisterPage = () => (
         {/* <Navbar /> */}
     </div>
     <section>
-    <div className="flex justify-around gap-8">
-    <div className={layout.sectionImgReverse}>
+    <div className="flex flex-col md:flex-row justify-around items-center gap-8 px-4">
+    <div className={`${layout.sectionImgReverse} hidden md:block`}>
       <img src={bill} alt="billing" className="w-[100%] h-[100%] pl-[60px] relative z-[5] object-contain" />
 
       <div className="absolute z-[3] -left-1/2 top-0 w-[50%] h-[50%] rounded-full white__gradient" />
       <div className="absolute z-[0] w-[50%] h-[50%] -left-1/2 bottom-0 rounded-full pink__gradient" />
     </div>
 
-    <div className={layout.sectionInfo}>
+    <div className="w-full max-w-md">
       <Register/>
     </div>
     </div>

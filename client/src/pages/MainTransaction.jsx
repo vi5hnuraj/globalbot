@@ -74,7 +74,7 @@ function MainTransaction() {
     <div className="bg-black text-zinc-200 min-h-screen p-4 md:p-6 font-sans">
       <div className="max-w-[1600px] mx-auto">
         {/* ─── 4 BOXES IN A SINGLE ROW ─── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {userData && (
             <>
               <BankCard userData={userData} />

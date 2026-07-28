@@ -350,13 +350,13 @@ const Profile = () => {
     >
       <div className="absolute inset-0 bg-black/60"></div>
 
-      <div className="relative z-10 max-w-[1400px] mx-auto p-4 md:p-8 lg:p-12">
+      <div className="relative z-10 max-w-[1400px] mx-auto p-3 sm:p-4 md:p-8 lg:p-12">
 
         {/* ========== 2x2 GRID ========== */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
 
           {/* ─── CARD 1: User Profile ─── */}
-          <div className="relative bg-[#0c0c0c]/80 backdrop-blur-xl border border-zinc-800/60 rounded-[2rem] p-8 shadow-2xl overflow-hidden flex flex-col justify-between">
+          <div className="relative bg-[#0c0c0c]/80 backdrop-blur-xl border border-zinc-800/60 rounded-[2rem] p-5 sm:p-8 shadow-2xl overflow-hidden flex flex-col justify-between">
             <div>
               <div className="flex justify-between items-start mb-6">
                 <p className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.25em]">Profile</p>
@@ -497,7 +497,7 @@ const Profile = () => {
           </div>
 
           {/* ─── CARD 2: Wallet Details (was Bank Details) ─── */}
-          <div className="relative bg-[#0c0c0c]/80 backdrop-blur-xl border border-zinc-800/60 rounded-[2rem] p-8 shadow-2xl overflow-hidden">
+          <div className="relative bg-[#0c0c0c]/80 backdrop-blur-xl border border-zinc-800/60 rounded-[2rem] p-5 sm:p-8 shadow-2xl overflow-hidden">
             <p className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.25em] mb-6">Wallet Details</p>
 
             <div className="space-y-4">
@@ -614,11 +614,11 @@ const Profile = () => {
           </div>
 
           {/* ─── CARD 3: Transaction Graph (Send & Receive) ─── */}
-          <div className="relative bg-[#0c0c0c]/80 backdrop-blur-xl border border-zinc-800/60 rounded-[2rem] p-8 shadow-2xl overflow-hidden">
+          <div className="relative bg-[#0c0c0c]/80 backdrop-blur-xl border border-zinc-800/60 rounded-[2rem] p-5 sm:p-8 shadow-2xl overflow-hidden">
             <p className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.25em] mb-2">Activity Summary</p>
 
             <div className="flex items-baseline gap-3 mb-1">
-              <h3 className="text-3xl font-black text-white tracking-tighter">{totalSent.toFixed(4)} BOT</h3>
+              <h3 className="text-xl sm:text-3xl font-black text-white tracking-tighter">{totalSent.toFixed(4)} BOT</h3>
             </div>
 
             <div className="flex items-center gap-4 mb-6">
@@ -638,15 +638,15 @@ const Profile = () => {
           </div>
 
           {/* ─── CARD 4: Wallet Transactions ─── */}
-          <div className="relative bg-[#0c0c0c]/80 backdrop-blur-xl border border-zinc-800/60 rounded-[2rem] p-8 shadow-2xl overflow-hidden">
+          <div className="relative bg-[#0c0c0c]/80 backdrop-blur-xl border border-zinc-800/60 rounded-[2rem] p-5 sm:p-8 shadow-2xl overflow-hidden">
             <p className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.25em] mb-2">On-Chain Activity</p>
 
             <div className="flex items-baseline justify-between mb-6">
               <div>
-                <h3 className="text-3xl font-black text-white tracking-tighter">{totalCryptoTx}</h3>
+                <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tighter">{totalCryptoTx}</h3>
                 <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mt-0.5">Total On-Chain Txs</p>
               </div>
-              <span className="text-emerald-500 text-[10px] font-black bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+              <span className="text-emerald-500 text-[8px] sm:text-[10px] font-black bg-emerald-500/10 px-2 sm:px-3 py-1 rounded-full border border-emerald-500/20">
                 {totalCryptoValue.toFixed(2)} BOT Volume
               </span>
             </div>

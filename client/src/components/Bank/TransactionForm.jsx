@@ -118,7 +118,7 @@ const TransactionForm = ({ onTransactionSuccess, userData }) => {
   const botBalance = Number(userData?.bankDetails?.usdcBalance || 0);
 
   return (
-    <div className="bg-zinc-900 border-zinc-800 border-[1px] p-8 rounded-2xl flex-1 shadow-2xl transition-all duration-300">
+    <div className="bg-zinc-900 border-zinc-800 border-[1px] p-5 sm:p-8 rounded-2xl flex-1 shadow-2xl transition-all duration-300">
 
       <div className="flex items-center justify-between mb-8">
         <div>

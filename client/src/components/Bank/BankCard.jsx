@@ -94,7 +94,7 @@ const BankCard = ({ userData }) => {
     <>
       <Toaster />
       {/* ─── Box 1: External Web3 Wallet ─── */}
-      <div className="bg-gradient-to-br from-cyan-950 to-zinc-900 border border-cyan-700/40 p-6 h-80 w-full rounded-2xl relative shadow-xl font-mono overflow-hidden flex flex-col justify-between">
+      <div className="bg-gradient-to-br from-cyan-950 to-zinc-900 border border-cyan-700/40 p-5 sm:p-6 w-full rounded-2xl relative shadow-xl font-mono overflow-hidden flex flex-col justify-between">
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent pointer-events-none" />
 
         <div className="relative z-10 h-full flex flex-col justify-between">

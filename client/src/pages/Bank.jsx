@@ -167,8 +167,8 @@ const Bank = () => {
 
   if (userBankData) {
     return (
-      <div className="min-h-screen w-full bg-black text-white p-5 pt-10 border-t border-zinc-800 font-sans flex items-center justify-center">
-        <div className="mt-8 w-full max-w-3xl bg-[#0a0a0e] rounded-2xl border border-zinc-800 p-8 shadow-2xl relative overflow-hidden">
+      <div className="min-h-screen w-full bg-black text-white p-4 sm:p-5 pt-6 sm:pt-10 border-t border-zinc-800 font-sans flex items-center justify-center">
+        <div className="mt-4 sm:mt-8 w-full max-w-3xl bg-[#0a0a0e] rounded-2xl border border-zinc-800 p-5 sm:p-8 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500" />
 
           <div className="flex items-center gap-3 mb-8 border-b border-zinc-800 pb-4">
@@ -220,10 +220,10 @@ const Bank = () => {
 
   return (
     <div>
-      <div className="min-h-screen text-white flex items-center justify-center p-10">
-        <div className="w-full max-w-4xl bg-zinc-800 border-zinc-700 border-[1px] rounded-lg shadow-lg p-6 flex relative">
+      <div className="min-h-screen text-white flex items-center justify-center p-4 sm:p-10">
+        <div className="w-full max-w-4xl bg-zinc-800 border-zinc-700 border-[1px] rounded-lg shadow-lg p-4 sm:p-6 flex flex-col md:flex-row relative">
           {/* Left: Region & Bank selection */}
-          <div className="w-1/2 p-6 flex flex-col gap-6">
+          <div className="w-full md:w-1/2 p-4 sm:p-6 flex flex-col gap-6">
             <div>
               <h2 className="text-2xl font-bold mb-4 text-amber-400">Select Region</h2>
               <select
@@ -268,7 +268,7 @@ const Bank = () => {
           </div>
 
           {/* Right: Bank form */}
-          <div className="w-1/2 p-6">
+          <div className="w-full md:w-1/2 p-4 sm:p-6">
             {selectedBank ? (
               <>
                 <h2 className="text-2xl font-bold mb-4 text-amber-400">{selectedBank.name}</h2>

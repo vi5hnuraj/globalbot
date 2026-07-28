@@ -568,7 +568,11 @@ export const executeTool = async (name, args, user, accessToken) => {
       }
 
       const senderTag = senderUser?.global_pay_tag || senderUser?.email;
-      const scheduledAt = date ? new Date(date) : new Date(Date.now() + 86400000);
+      const scheduledAt = date
+        ? (typeof date === 'string' && date.endsWith('Z')
+          ? new Date(new Date(date).getTime() + new Date(date).getTimezoneOffset() * 60000)
+          : new Date(date))
+        : new Date(Date.now() + 86400000);
 
       if (isNaN(scheduledAt.getTime())) {
         return { tool: "schedulePayment", success: false, message: "❌ Invalid date/time format. Try: 'Schedule 5 BOT to @user tomorrow at 3pm'." };

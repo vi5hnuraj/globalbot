@@ -39,10 +39,15 @@ const createPaymentsRecord = async (payment, txHash) => {
   if (txHash) {
     const { data: existing } = await supabase
       .from('payments')
-      .select('id')
+      .select('id, keyword')
       .eq('tx_hash', txHash)
       .maybeSingle();
-    if (existing) return;
+    if (existing) {
+      if (existing.keyword !== 'Scheduled Payment (Released)') {
+        await supabase.from('payments').update({ keyword: 'Scheduled Payment (Released)' }).eq('id', existing.id);
+      }
+      return;
+    }
   }
   await supabase.from('payments').insert({
     sender_id: payment.sender_id,

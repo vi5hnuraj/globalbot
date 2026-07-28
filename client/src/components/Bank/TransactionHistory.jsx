@@ -141,12 +141,12 @@ const TransactionHistory = ({ transactions, userData, onSuccess }) => {
   };
 
   return (
-    <div className="bg-[#0a0a0a] border-zinc-800/50 border p-8 rounded-[2.5rem] flex-1 shadow-2xl h-full flex flex-col relative overflow-hidden group">
+    <div className="bg-[#0a0a0a] border-zinc-800/50 border p-5 sm:p-8 rounded-[2.5rem] flex-1 shadow-2xl h-full flex flex-col relative overflow-hidden group">
       <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-3xl -mr-16 -mt-16"></div>
 
-      <div className="flex items-center justify-between mb-8 relative z-10">
+      <div className="flex items-center justify-between mb-6 sm:mb-8 relative z-10">
         <div>
-          <h2 className="text-3xl font-black text-white tracking-tighter">Activity Log</h2>
+          <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tighter">Activity Log</h2>
           <p className="text-zinc-500 text-[10px] font-black uppercase tracking-widest mt-1">On-Chain Transactions</p>
         </div>
         <div className="flex items-center gap-2">

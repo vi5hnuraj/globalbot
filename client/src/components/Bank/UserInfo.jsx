@@ -15,7 +15,7 @@ const UserInfo = ({ userData, transactions }) => {
 
   return (
     /* ─── Box 3: User Profile & GlobalPay Tag ─── */
-    <div className="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl shadow-xl font-mono h-80 w-full flex flex-col justify-between overflow-hidden">
+    <div className="bg-zinc-900 border border-zinc-800 p-5 sm:p-6 rounded-2xl shadow-xl font-mono w-full flex flex-col justify-between overflow-hidden">
       <div>
         <h2 className="text-xl font-bold text-amber-500 mb-2 truncate">👋🏻 Hello, {name}!</h2>
         <p className="text-xs text-zinc-400 leading-relaxed mb-4">

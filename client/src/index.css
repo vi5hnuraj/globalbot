@@ -203,6 +203,48 @@ body::after {
   animation: drift 12s ease-in-out infinite reverse;
 }
 
+/* ─── Mobile Responsive Overrides ─── */
+@media (max-width: 480px) {
+  html { font-size: 14px; }
+}
+@media (min-width: 481px) and (max-width: 768px) {
+  html { font-size: 15px; }
+}
+
+/* Table horizontal scroll on mobile */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.table-responsive table {
+  min-width: 640px;
+}
+
+/* Prevent horizontal overflow */
+body { overflow-x: hidden; }
+#root { overflow-x: hidden; }
+
+/* Better touch targets */
+button, a, input, select, textarea {
+  touch-action: manipulation;
+}
+
+/* Mobile-friendly card adjustments */
+@media (max-width: 639px) {
+  .card-compact { padding: 1rem !important; }
+  .px-mobile { padding-left: 0.75rem !important; padding-right: 0.75rem !important; }
+  .text-mobile-sm { font-size: 0.75rem !important; }
+  .text-mobile-xs { font-size: 0.625rem !important; }
+  .gap-mobile { gap: 0.5rem !important; }
+}
+
+/* Full-width inputs on mobile */
+@media (max-width: 639px) {
+  input, select, textarea {
+    max-width: 100% !important;
+  }
+}
+
 /* ─── Custom Scrollbar ─── */
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
