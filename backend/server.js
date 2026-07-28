@@ -11,7 +11,6 @@ import moneyTransferRoutes from './src/routes/moneyTransferRoutes.js';
 import payRoutes from './src/routes/pay.js'; // ✅ Import new pay route
 import paymentRoutes from './src/routes/payment.js';
 import aiAgentRoutes from './src/routes/aiAgentRoutes.js'; // ✅ AI Tool Calling Agent
-import debugRoutes from './src/routes/debugRoutes.js'; // 🔍 TEMP: key diagnostic (remove after fix)
 
 import rateLimit from 'express-rate-limit';
 import { idempotencyMiddleware } from './src/middleware/idempotencyMiddleware.js';
@@ -123,7 +122,6 @@ app.use('/api/money-transfer', paymentLimiter, idempotencyMiddleware, moneyTrans
 app.use('/api/pay', paymentLimiter, idempotencyMiddleware, payRoutes);
 app.use('/api/payment', paymentLimiter, idempotencyMiddleware, paymentRoutes);
 app.use('/api/agent', aiLimiter, idempotencyMiddleware, aiAgentRoutes); // ✅ AI Agent with dedicated rate limiter
-app.use('/api/debug', debugRoutes); // 🔍 TEMP: remove after key diagnostic
 
 // ✅ Default route
 app.get('/', (req, res) => {
