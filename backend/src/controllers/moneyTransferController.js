@@ -340,7 +340,7 @@ export const createMoneyTransfer = async (req, res) => {
     if (mtErr) throw mtErr;
 
     // 4. Update Receiver BankDetails usdcBalance dynamically
-    if (network === 'sepolia' || network === 'botchain') {
+    if ((network === 'sepolia' || network === 'botchain') && receiverBankDetails) {
       const currentUsdc = Number(receiverBankDetails.usdc_balance || 0);
       const newUsdcBal = currentUsdc + transferAmountUsdc;
 
