@@ -156,7 +156,11 @@ export const createMoneyTransfer = async (req, res) => {
       .eq('user_id', senderUser.id)
       .maybeSingle();
 
-    if (!senderBankDetails) return res.status(404).json({ message: 'Sender bank details not found' });
+    // For fiat transfers, bank_details is required (balance deductions).
+    // For crypto/BOT transfers, only region is needed — default to 'Global' if missing.
+    if (!senderBankDetails && network === 'fiat') {
+      return res.status(404).json({ message: 'Sender bank details not found' });
+    }
 
     const { data: receiverBankDetails } = await supabase
       .from('bank_details')
@@ -164,10 +168,12 @@ export const createMoneyTransfer = async (req, res) => {
       .eq('user_id', receiverUser.id)
       .maybeSingle();
 
-    if (!receiverBankDetails) return res.status(404).json({ message: 'Receiver bank details not found' });
+    if (!receiverBankDetails && network === 'fiat') {
+      return res.status(404).json({ message: 'Receiver bank details not found' });
+    }
 
-    const senderRegion = senderBankDetails.region || 'India';
-    const receiverRegion = receiverBankDetails.region || 'India';
+    const senderRegion = senderBankDetails?.region || 'Global';
+    const receiverRegion = receiverBankDetails?.region || 'Global';
 
     // Cross-border routing rules
     if (senderRegion !== receiverRegion) {
