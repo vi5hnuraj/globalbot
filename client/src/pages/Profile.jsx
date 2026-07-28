@@ -466,7 +466,7 @@ const Profile = () => {
             </div>
 
             <div className="flex gap-3 mt-auto pt-6">
-              <Link to="/web3-kyc" className="flex-1 flex items-center justify-center gap-2 bg-zinc-800/40 hover:bg-zinc-800 py-3 rounded-xl border border-zinc-700/30 transition-all">
+              <Link to="/web3-kyc" className="hidden flex-1 flex items-center justify-center gap-2 bg-zinc-800/40 hover:bg-zinc-800 py-3 rounded-xl border border-zinc-700/30 transition-all">
                 <FaShieldAlt className={kyc ? "text-emerald-500" : "text-amber-500"} size={12} />
                 <span className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">{kyc ? "Verified" : "Web3 Identity"}</span>
               </Link>
