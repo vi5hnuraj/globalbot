@@ -175,134 +175,105 @@ const Reqpay = ({
 
   return (
     <>
-      {/* ─── INBOX CARD ─── */}
       <div
-        className={`bg-[#0a0a0a] border-zinc-800/50 border p-4 sm:p-5 rounded-2xl w-full max-w-4xl mx-auto shadow-lg relative overflow-hidden group mb-3 sm:mb-4 transition-all ${
+        className={`bg-zinc-900/20 border rounded-xl sm:rounded-2xl w-full overflow-hidden group transition-all duration-200 ${
           isPaid
-            ? "border-emerald-500/30"
+            ? "border-emerald-500/20"
             : isExpired
-            ? "border-red-500/30"
-            : isSentByMe
-            ? "hover:border-emerald-500/30"
-            : "hover:border-blue-500/30"
+            ? "border-red-500/20"
+            : "border-zinc-800/50 hover:border-zinc-700/60"
         }`}
       >
-        <div
-          className={`absolute top-0 right-0 w-24 h-24 rounded-full blur-2xl -mr-8 -mt-8 transition-all duration-700 ${
-            isPaid
-              ? "bg-emerald-500/10"
-              : isExpired
-              ? "bg-red-500/10"
-              : isSentByMe
-              ? "bg-emerald-500/5 group-hover:bg-emerald-500/10"
-              : "bg-blue-500/5 group-hover:bg-blue-500/10"
-          }`}
-        />
-
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center relative z-10 w-full gap-3 sm:gap-0">
-          {/* Left: icon + name + sender + live timer */}
-          <div className="flex items-center gap-3 sm:gap-4">
+        <div className="p-3.5 sm:p-5">
+          {/* Top section: icon, title, sender, timer */}
+          <div className="flex items-start gap-3 sm:gap-4">
             <div
-              className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center border shrink-0 ${
+              className={`w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center border shrink-0 ${
                 isPaid
                   ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
                   : isExpired
                   ? "bg-red-500/10 border-red-500/20 text-red-400"
-                  : isSentByMe
-                  ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
                   : "bg-blue-500/10 border-blue-500/20 text-blue-400"
               }`}
             >
-              <FiFileText size={18} className="sm:w-5 sm:h-5" />
+              <FiFileText size={16} className="sm:w-[18px] sm:h-[18px]" />
             </div>
-            <div className="flex flex-col min-w-0">
+            <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 flex-wrap">
-                <p className="text-white font-bold text-sm sm:text-lg truncate max-w-[140px] sm:max-w-none">
+                <span className="text-white font-bold text-sm sm:text-base truncate max-w-[160px] sm:max-w-[240px]">
                   {name === "Unknown"
                     ? isSentByMe
                       ? "Requested Payment"
                       : "Pending Invoice"
                     : name}
-                </p>
+                </span>
                 {isExpired && (
-                  <span className="px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-red-500/10 text-red-400 border border-red-500/20 shrink-0">
+                  <span className="px-1.5 py-0.5 rounded text-[8px] sm:text-[9px] font-black uppercase tracking-wider bg-red-500/10 text-red-400 border border-red-500/20 shrink-0">
                     EXPIRED
                   </span>
                 )}
                 {isPaid && (
-                  <span className="px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
+                  <span className="px-1.5 py-0.5 rounded text-[8px] sm:text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
                     PAID
                   </span>
                 )}
               </div>
-
-              <p className="text-zinc-500 text-[11px] sm:text-xs font-medium tracking-wide flex items-center gap-1.5 mt-0.5 truncate">
+              <div className="flex items-center gap-1.5 mt-0.5 text-zinc-500 text-[11px] sm:text-xs">
                 {isSentByMe ? (
-                  <FiCheckCircle className="text-emerald-400 shrink-0" size={12} />
+                  <FiCheckCircle className="text-emerald-400 shrink-0" size={11} />
                 ) : (
-                  <FiClock className="text-blue-400 shrink-0" size={12} />
+                  <FiClock className="text-blue-400 shrink-0" size={11} />
                 )}
-                {isSentByMe ? "To: " : "From: "}
-                {sender}
-              </p>
-
+                <span className="truncate">{isSentByMe ? "To: " : "From: "}{sender}</span>
+              </div>
               {!isPaid && !isExpired && (
-                <p className="text-amber-400 text-[11px] sm:text-xs font-semibold tracking-wide flex items-center gap-1.5 mt-1 animate-pulse">
-                  <FiClock size={11} />
+                <div className="flex items-center gap-1 mt-1 text-amber-400/80 text-[11px] sm:text-xs animate-pulse">
+                  <FiClock size={10} />
                   <span className="truncate">{timeLeftStr}</span>
-                </p>
+                </div>
               )}
             </div>
           </div>
 
-          {/* Right: amount + action button */}
-          <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-6">
-            <div className="text-left sm:text-right flex flex-col">
-              <p className="text-zinc-500 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest mb-0.5">
-                Amount Due
-              </p>
-              <p className="font-black text-base sm:text-2xl text-amber-400 tracking-tight">
+          {/* Divider on mobile */}
+          <div className="sm:hidden border-t border-zinc-800/40 my-3" />
+
+          {/* Bottom section: amount + action */}
+          <div className="flex items-center justify-between gap-3">
+            <div className="min-w-0">
+              <div className="text-zinc-500 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest">Amount Due</div>
+              <div className="font-black text-base sm:text-xl text-amber-400 tracking-tight mt-0.5">
                 {Number(liveBotRequiredAmount).toFixed(4)} BOT
-              </p>
-              <p className="text-[11px] sm:text-xs text-zinc-400 font-bold mt-0.5">
+              </div>
+              <div className="text-[11px] sm:text-xs text-zinc-500 font-semibold mt-0.5">
                 ≈ ${targetUSD.toFixed(2)} USD
-              </p>
+              </div>
             </div>
 
             {isPaid ? (
-              <button
-                disabled
-                className="px-4 sm:px-8 py-2.5 sm:py-3.5 bg-emerald-950/30 text-emerald-400 rounded-xl font-bold text-[11px] sm:text-sm uppercase tracking-widest border border-emerald-500/30 cursor-not-allowed flex items-center gap-1.5 shrink-0"
-              >
-                <FiCheckCircle size={14} /> Paid
+              <button disabled className="px-4 sm:px-6 py-2 sm:py-2.5 bg-emerald-950/30 text-emerald-400 rounded-xl font-bold text-[11px] sm:text-sm tracking-wider border border-emerald-500/30 cursor-not-allowed flex items-center gap-1.5 shrink-0 whitespace-nowrap">
+                <FiCheckCircle size={13} /> Paid
               </button>
             ) : isExpired ? (
-              <button
-                disabled
-                className="px-4 sm:px-8 py-2.5 sm:py-3.5 bg-red-950/30 text-red-400 rounded-xl font-bold text-[11px] sm:text-sm uppercase tracking-widest border border-red-500/30 cursor-not-allowed shrink-0"
-              >
+              <button disabled className="px-4 sm:px-6 py-2 sm:py-2.5 bg-red-950/30 text-red-400 rounded-xl font-bold text-[11px] sm:text-sm tracking-wider border border-red-500/30 cursor-not-allowed shrink-0 whitespace-nowrap">
                 Expired
               </button>
             ) : isSentByMe ? (
-              <button
-                disabled
-                className="px-4 sm:px-8 py-2.5 sm:py-3.5 bg-zinc-900 text-zinc-500 rounded-xl font-bold text-[11px] sm:text-sm uppercase tracking-widest border border-zinc-800 cursor-not-allowed shrink-0"
-              >
+              <button disabled className="px-4 sm:px-6 py-2 sm:py-2.5 bg-zinc-800/50 text-zinc-500 rounded-xl font-bold text-[11px] sm:text-sm tracking-wider border border-zinc-700/50 cursor-not-allowed shrink-0 whitespace-nowrap">
                 Awaiting
               </button>
             ) : (
               <button
                 onClick={handleSettle}
-                className="px-4 sm:px-8 py-2.5 sm:py-3.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-bold text-[11px] sm:text-sm uppercase tracking-widest shadow-lg transition-all border border-blue-400/30 flex items-center gap-2 shrink-0"
+                className="px-4 sm:px-6 py-2 sm:py-2.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-bold text-[11px] sm:text-sm tracking-wider shadow-lg transition-all border border-blue-400/30 flex items-center gap-1.5 shrink-0 whitespace-nowrap"
               >
-                <FiZap size={13} /> Settle
+                <FiZap size={12} /> Settle
               </button>
             )}
           </div>
         </div>
       </div>
 
-      {/* ─── QR PAYMENT MODAL — overlays on Settle click ─── */}
       {showModal && (
         <QRPaymentModal
           isOpen={showModal}

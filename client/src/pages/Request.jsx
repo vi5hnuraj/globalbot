@@ -123,54 +123,49 @@ const Request = () => {
 
   if (loading) {
     return (
-      <div className="h-screen w-full bg-black text-white flex items-center justify-center">
-        <p className="text-gray-400 text-lg">Loading request history...</p>
+      <div className="flex items-center justify-center py-16">
+        <p className="text-zinc-500 text-sm">Loading request history...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="h-screen w-full bg-black text-white flex items-center justify-center">
-        <p className="text-red-400 text-lg">{error}</p>
+      <div className="flex items-center justify-center py-16">
+        <p className="text-red-400 text-sm">{error}</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen w-full bg-black text-white p-3 sm:p-5 border-t border-zinc-800">
-      <div className="mb-4 sm:mb-6 max-w-4xl mx-auto flex items-center justify-between">
-        <h2 className="text-lg sm:text-xl font-bold text-white tracking-wide">Inbox</h2>
-      </div>
-      <div className="max-w-4xl mx-auto space-y-4">
-        {data.length === 0 ? (
-          <div className="h-[200px] flex items-center justify-center bg-zinc-900/10 border border-zinc-800/40 rounded-2xl">
-            <p className="text-gray-550 italic text-sm">No pending invoices.</p>
-          </div>
-        ) : (
-          data.map((elem) => (
-            <Reqpay
-              key={elem._id}
-              name={elem.name}
-              sender={elem.sender}
-              amount={elem.amount}
-              currency={elem.currency}
-              requestedAmount={elem.requestedAmount}
-              requestedCurrency={elem.requestedCurrency}
-              exchangeRateSnapshot={elem.exchangeRateSnapshot}
-              botPriceSnapshot={elem.botPriceSnapshot}
-              botAmountSnapshot={elem.botAmountSnapshot}
-              status={elem.status}
-              isSentByMe={elem.isSentByMe}
-              reqId={elem._id}
-              receiverWalletAddress={elem.receiverWalletAddress}
-              receivingWalletType={elem.receivingWalletType}
-              createdAt={elem.createdAt}
-              onSettle={fetchInbox}
-            />
-          ))
-        )}
-      </div>
+    <div className="space-y-3 sm:space-y-4">
+      {data.length === 0 ? (
+        <div className="py-16 flex items-center justify-center bg-zinc-900/10 border border-zinc-800/40 rounded-xl sm:rounded-2xl">
+          <p className="text-zinc-500 italic text-sm">No pending invoices.</p>
+        </div>
+      ) : (
+        data.map((elem) => (
+          <Reqpay
+            key={elem._id}
+            name={elem.name}
+            sender={elem.sender}
+            amount={elem.amount}
+            currency={elem.currency}
+            requestedAmount={elem.requestedAmount}
+            requestedCurrency={elem.requestedCurrency}
+            exchangeRateSnapshot={elem.exchangeRateSnapshot}
+            botPriceSnapshot={elem.botPriceSnapshot}
+            botAmountSnapshot={elem.botAmountSnapshot}
+            status={elem.status}
+            isSentByMe={elem.isSentByMe}
+            reqId={elem._id}
+            receiverWalletAddress={elem.receiverWalletAddress}
+            receivingWalletType={elem.receivingWalletType}
+            createdAt={elem.createdAt}
+            onSettle={fetchInbox}
+          />
+        ))
+      )}
     </div>
   );
 };

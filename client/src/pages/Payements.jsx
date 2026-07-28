@@ -5,11 +5,17 @@ import Pay from '../components/Pay';
 import Request from './Request';
 import RequestForm from '../components/RequestForm';
 
-const tabs = [
-  { key: 'pay', label: 'Pay', icon: FiSend },
-  { key: 'send-request', label: 'Request', icon: FiDollarSign },
-  { key: 'reqpay', label: 'Inbox', icon: FiInbox },
+const quickActions = [
+  { key: 'pay', label: 'Pay', desc: 'Send BOT to anyone', icon: FiSend },
+  { key: 'send-request', label: 'Request', desc: 'Create an invoice', icon: FiDollarSign },
+  { key: 'reqpay', label: 'Inbox', desc: 'View pending requests', icon: FiInbox },
 ];
+
+const cardColors = {
+  pay: { gradient: 'from-amber-500/15 to-amber-600/5', border: 'border-amber-500/25', iconBg: 'bg-amber-500/10 text-amber-400' },
+  'send-request': { gradient: 'from-blue-500/15 to-blue-600/5', border: 'border-blue-500/25', iconBg: 'bg-blue-500/10 text-blue-400' },
+  reqpay: { gradient: 'from-emerald-500/15 to-emerald-600/5', border: 'border-emerald-500/25', iconBg: 'bg-emerald-500/10 text-emerald-400' },
+};
 
 const Payements = () => {
     const [searchParams] = useSearchParams();
@@ -24,32 +30,58 @@ const Payements = () => {
     }, [searchParams]);
 
     return (
-        <div className='flex flex-col bg-black w-full text-white border-t border-zinc-800 min-h-screen overflow-y-auto'>
-            <div className='w-full max-w-4xl mx-auto px-3 sm:px-8 pt-4 sm:pt-8 pb-0'>
-              <div className='flex gap-1 sm:gap-2 bg-zinc-900/60 p-1.5 rounded-2xl border border-zinc-800/60'>
-                {tabs.map(({ key, label, icon: Icon }) => (
-                  <div
-                    key={key}
-                    onClick={() => setActive(key)}
-                    className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold uppercase tracking-widest transition-all cursor-pointer ${
-                      active === key
-                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
-                        : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50'
-                    }`}
-                  >
-                    <Icon size={15} className="sm:w-4 sm:h-4" />
-                    {label}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className='flex justify-center px-3 sm:px-4 pt-6 sm:pt-8 pb-8'>
-                {active === "pay" && <Pay />}
-                {active === "send-request" && <RequestForm />}
-                {active === "reqpay" && <Request />}
+        <div className="min-h-screen bg-black text-white">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 lg:py-12">
+
+                <div className="mb-8 sm:mb-10">
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">Payments</h1>
+                    <p className="text-zinc-500 text-sm sm:text-base mt-1.5">Send, request, and manage your BOT payments on-chain</p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8 sm:mb-10">
+                    {quickActions.map(({ key, label, desc, icon: Icon }) => {
+                        const isActive = active === key;
+                        const colors = cardColors[key];
+                        return (
+                            <button
+                                key={key}
+                                onClick={() => setActive(key)}
+                                className={`relative w-full text-left p-4 sm:p-5 rounded-2xl border transition-all duration-300 ${
+                                    isActive
+                                        ? `bg-gradient-to-br ${colors.gradient} ${colors.border} shadow-lg`
+                                        : 'bg-zinc-900/30 border-zinc-800/40 hover:border-zinc-700/60 hover:bg-zinc-900/50'
+                                }`}
+                            >
+                                <div className="flex items-start gap-3 sm:gap-4">
+                                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center border shrink-0 ${
+                                        isActive
+                                            ? `${colors.iconBg} ${colors.border}`
+                                            : 'bg-zinc-800/50 text-zinc-500 border-zinc-700/50'
+                                    }`}>
+                                        <Icon size={20} />
+                                    </div>
+                                    <div className="min-w-0">
+                                        <div className="font-bold text-sm sm:text-base">{label}</div>
+                                        <div className="text-zinc-500 text-xs sm:text-sm mt-0.5">{desc}</div>
+                                    </div>
+                                </div>
+                                {isActive && (
+                                    <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/[0.06] pointer-events-none" />
+                                )}
+                            </button>
+                        );
+                    })}
+                </div>
+
+                <div>
+                    {active === "pay" && <Pay />}
+                    {active === "send-request" && <RequestForm />}
+                    {active === "reqpay" && <Request />}
+                </div>
+
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Payements;
