@@ -111,8 +111,10 @@ Never output raw code. Choose the best matching tool to execute backend actions.
 
       const parseScheduleDate = (str) => {
         const lower = str.toLowerCase();
-        // Simulate user's local "now" on the UTC server using their browser's timezone offset
-        const now = new Date(Date.now() - tzOffsetMinutes * 60 * 1000);
+        // nowUtc is the absolute current time (UTC)
+        const nowUtc = new Date();
+        // localNow represents the user's wall clock (shifted by the negative timezone offset)
+        const localNow = new Date(Date.now() - tzOffsetMinutes * 60 * 1000);
 
         const parseTime = (str) => {
           const m = str.match(/(\d{1,2})(?:[:.](\d{2}))?\s*(am|pm)?/i);
@@ -126,32 +128,38 @@ Never output raw code. Choose the best matching tool to execute backend actions.
         };
 
         // "today at 5pm" / "today at 5:30pm" / "today at 3.52pm"
-        // Also handles common typos: todat, tody, todai, etc.
         const todayMatch = lower.match(/tod(?:ay|at|y|ai)\s+at\s+(\d{1,2}(?:[:.]\d{2})?\s*(?:am|pm)?)/i);
         if (todayMatch) {
           const t = parseTime(todayMatch[1]);
           if (t) {
-            const d = new Date(now);
-            d.setHours(t.hours, t.minutes, 0, 0);
-            if (d > now) return d.toISOString();
-            d.setDate(d.getDate() + 1);
-            return d.toISOString();
+            const targetUtc = new Date(nowUtc);
+            targetUtc.setUTCHours(t.hours, t.minutes, 0, 0);
+            const adjusted = new Date(targetUtc.getTime() + tzOffsetMinutes * 60 * 1000);
+            if (adjusted <= nowUtc) {
+              adjusted.setUTCDate(adjusted.getUTCDate() + 1);
+            }
+            return adjusted.toISOString();
           }
         }
 
         // "tomorrow at 3pm" / "tommorow" / "tmr" etc.
         const tomorrowMatch = lower.match(/(?:tomorrow|tommorow|tommorrow|tmr)(?:\s+at\s+(\d{1,2}(?:[:.]\d{2})?\s*(?:am|pm)?))?/i);
         if (tomorrowMatch) {
-          const d = new Date(now);
-          d.setDate(d.getDate() + 1);
+          const d = new Date(nowUtc);
+          d.setUTCDate(d.getUTCDate() + 1);
+          let targetHours = 9;
+          let targetMinutes = 0;
           if (tomorrowMatch[1]) {
             const t = parseTime(tomorrowMatch[1]);
-            if (t) { d.setHours(t.hours, t.minutes, 0, 0); }
-            else { d.setHours(9, 0, 0, 0); }
-          } else {
-            d.setHours(9, 0, 0, 0);
+            if (t) {
+              targetHours = t.hours;
+              targetMinutes = t.minutes;
+            }
           }
-          return d.toISOString();
+          const targetUtc = new Date(d);
+          targetUtc.setUTCHours(targetHours, targetMinutes, 0, 0);
+          const adjusted = new Date(targetUtc.getTime() + tzOffsetMinutes * 60 * 1000);
+          return adjusted.toISOString();
         }
 
         // "next monday at 10am" / "friday at 3pm" / "friday at 3.52pm"
@@ -159,19 +167,26 @@ Never output raw code. Choose the best matching tool to execute backend actions.
         const dayMatch = lower.match(/(?:next\s+)?(sunday|monday|tuesday|wednesday|thursday|friday|saturday)(?:\s+at\s+(\d{1,2}(?:[:.]\d{2})?\s*(?:am|pm)?))?/i);
         if (dayMatch) {
           const targetDay = dayNames.indexOf(dayMatch[1].toLowerCase());
-          const d = new Date(now);
-          const currentDay = d.getDay();
-          let daysUntil = targetDay - currentDay;
+          const currentLocalDay = localNow.getUTCDay(); // Day according to user's local clock
+          let daysUntil = targetDay - currentLocalDay;
           if (daysUntil <= 0) daysUntil += 7;
-          d.setDate(d.getDate() + daysUntil);
+          
+          let targetHours = 9;
+          let targetMinutes = 0;
           if (dayMatch[2]) {
             const t = parseTime(dayMatch[2]);
-            if (t) { d.setHours(t.hours, t.minutes, 0, 0); }
-            else { d.setHours(9, 0, 0, 0); }
-          } else {
-            d.setHours(9, 0, 0, 0);
+            if (t) {
+              targetHours = t.hours;
+              targetMinutes = t.minutes;
+            }
           }
-          return d.toISOString();
+          
+          const d = new Date(nowUtc);
+          d.setUTCDate(d.getUTCDate() + daysUntil);
+          const targetUtc = new Date(d);
+          targetUtc.setUTCHours(targetHours, targetMinutes, 0, 0);
+          const adjusted = new Date(targetUtc.getTime() + tzOffsetMinutes * 60 * 1000);
+          return adjusted.toISOString();
         }
 
         // "in 3 days" / "in 5 hours"
@@ -179,10 +194,10 @@ Never output raw code. Choose the best matching tool to execute backend actions.
         if (inMatch) {
           const num = parseInt(inMatch[1]);
           const unit = inMatch[2].toLowerCase();
-          const d = new Date(now);
-          if (unit.startsWith('day')) d.setDate(d.getDate() + num);
-          else if (unit.startsWith('hour')) d.setHours(d.getHours() + num);
-          else if (unit.startsWith('minute')) d.setMinutes(d.getMinutes() + num);
+          const d = new Date(nowUtc);
+          if (unit.startsWith('day')) d.setUTCDate(d.getUTCDate() + num);
+          else if (unit.startsWith('hour')) d.setUTCHours(d.getUTCHours() + num);
+          else if (unit.startsWith('minute')) d.setUTCMinutes(d.getUTCMinutes() + num);
           return d.toISOString();
         }
 
@@ -199,11 +214,13 @@ Never output raw code. Choose the best matching tool to execute backend actions.
         if (timeOnlyMatch) {
           const t = parseTime(timeOnlyMatch[1]);
           if (t) {
-            const d = new Date(now);
-            d.setHours(t.hours, t.minutes, 0, 0);
-            if (d > now) return d.toISOString();
-            d.setDate(d.getDate() + 1);
-            return d.toISOString();
+            const targetUtc = new Date(nowUtc);
+            targetUtc.setUTCHours(t.hours, t.minutes, 0, 0);
+            const adjusted = new Date(targetUtc.getTime() + tzOffsetMinutes * 60 * 1000);
+            if (adjusted <= nowUtc) {
+              adjusted.setUTCDate(adjusted.getUTCDate() + 1);
+            }
+            return adjusted.toISOString();
           }
         }
 
