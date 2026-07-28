@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from '../../utils/api';
+import api from '../../utils/api';
 
 const Register = () => {
   const [firstName, setFirstName] = useState('');
@@ -12,7 +12,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const a = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/register`, {
+      const a = await api.post('/auth/register', {
         name: firstName + ' ' + lastName,
         email,
         password
