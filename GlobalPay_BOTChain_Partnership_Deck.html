@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Global Pay × BOT Chain — Ecosystem Partnership Deck</title>
+  <meta name="description" content="Global Pay ecosystem partnership proposal for BOT Chain — AI-powered blockchain payment infrastructure." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --bg-deep:#050811;--bg-card:rgba(255,255,255,0.04);--bg-card-h:rgba(255,255,255,0.07);
+      --border:rgba(255,255,255,0.08);--border-glow:rgba(99,179,237,0.35);
+      --accent-blue:#4F9DFF;--accent-cyan:#00D4FF;--accent-violet:#9B87F5;
+      --accent-teal:#00E5CC;--accent-gold:#FFD166;
+      --grad-primary:linear-gradient(135deg,#4F9DFF 0%,#9B87F5 50%,#00D4FF 100%);
+      --grad-card:linear-gradient(145deg,rgba(79,157,255,0.12) 0%,rgba(155,135,245,0.08) 100%);
+      --text-primary:#F0F4FF;--text-secondary:#8B9CC4;--text-muted:#4A5568;
+      --font-head:'Space Grotesk',sans-serif;--font-body:'Inter',sans-serif;
+      --font-mono:'JetBrains Mono',monospace;
+      --radius:16px;--radius-lg:24px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg-deep);color:var(--text-primary);font-family:var(--font-body);overflow-x:hidden;line-height:1.6}
+    .presentation{display:flex;flex-direction:column;align-items:center;padding:0}
+    .nav-bar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:12px 32px;background:rgba(5,8,17,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+    .nav-brand{font-family:var(--font-head);font-size:15px;font-weight:700;background:var(--grad-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .nav-controls{display:flex;align-items:center;gap:10px}
+    .nav-btn{background:var(--bg-card);border:1px solid var(--border);color:var(--text-primary);padding:7px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-family:var(--font-body);font-weight:500;transition:all .2s}
+    .nav-btn:hover{background:var(--bg-card-h);border-color:var(--accent-blue)}
+    .slide-counter{font-family:var(--font-mono);font-size:13px;color:var(--text-secondary);background:var(--bg-card);border:1px solid var(--border);padding:6px 14px;border-radius:8px}
+    .notes-toggle{background:var(--bg-card);border:1px solid var(--border);color:var(--accent-cyan);padding:7px 14px;border-radius:8px;cursor:pointer;font-size:12px;font-family:var(--font-body);transition:all .2s}
+    .notes-toggle:hover{background:rgba(0,212,255,0.1)}
+    .slides-viewport{margin-top:58px;width:100%;max-width:1280px;position:relative}
+    .slide{display:none;width:100%;min-height:720px;position:relative;padding:60px 72px;overflow:hidden;animation:slideIn .4s cubic-bezier(.16,1,.3,1);flex-direction:column}
+    .slide.active{display:flex}
+    @keyframes slideIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .slide::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 80% 20%,rgba(79,157,255,.08) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 20% 80%,rgba(155,135,245,.07) 0%,transparent 60%);pointer-events:none;z-index:0}
+    .slide>*{position:relative;z-index:1}
+    .slide-num{position:absolute;top:18px;right:26px;font-family:var(--font-mono);font-size:11px;color:var(--text-muted);letter-spacing:.08em}
+    .slide-label{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-cyan);background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2);padding:4px 12px;border-radius:20px;margin-bottom:18px}
+    h1{font-family:var(--font-head);font-size:clamp(30px,4vw,52px);font-weight:800;line-height:1.12;letter-spacing:-.02em}
+    h2{font-family:var(--font-head);font-size:clamp(22px,3vw,36px);font-weight:700;line-height:1.2;letter-spacing:-.015em}
+    h3{font-family:var(--font-head);font-size:clamp(15px,2vw,21px);font-weight:600}
+    .gradient-text{background:var(--grad-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .gold-text{color:var(--accent-gold)}.cyan-text{color:var(--accent-cyan)}.violet-text{color:var(--accent-violet)}
+    p.lead{font-size:clamp(14px,1.4vw,17px);color:var(--text-secondary);line-height:1.7;max-width:680px}
+    .card{background:var(--grad-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 26px;transition:border-color .3s}
+    .card:hover{border-color:var(--border-glow)}
+    .card-grid{display:grid;gap:14px}
+    .cg2{grid-template-columns:repeat(2,1fr)}.cg3{grid-template-columns:repeat(3,1fr)}.cg4{grid-template-columns:repeat(4,1fr)}
+    .icon-box{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px;flex-shrink:0}
+    .ib-blue{background:rgba(79,157,255,.15)}.ib-violet{background:rgba(155,135,245,.15)}.ib-cyan{background:rgba(0,212,255,.15)}.ib-teal{background:rgba(0,229,204,.15)}.ib-gold{background:rgba(255,209,102,.15)}.ib-red{background:rgba(255,100,100,.15)}
+    .divider{width:55px;height:3px;background:var(--grad-primary);border-radius:2px;margin:14px 0}
+    .pill{display:inline-block;padding:4px 11px;border-radius:20px;font-size:12px;font-weight:500}
+    .pill-blue{background:rgba(79,157,255,.12);color:#7BB8FF;border:1px solid rgba(79,157,255,.25)}
+    .pill-violet{background:rgba(155,135,245,.12);color:#B8A8FF;border:1px solid rgba(155,135,245,.25)}
+    .pill-cyan{background:rgba(0,212,255,.12);color:#4DDFFF;border:1px solid rgba(0,212,255,.25)}
+    .pill-teal{background:rgba(0,229,204,.12);color:#4DEEDD;border:1px solid rgba(0,229,204,.25)}
+    .pill-gold{background:rgba(255,209,102,.12);color:#FFDA66;border:1px solid rgba(255,209,102,.25)}
+    .pill-red{background:rgba(255,100,100,.12);color:#FF8888;border:1px solid rgba(255,100,100,.25)}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+    .three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+    .timeline{display:flex;flex-direction:column;gap:0}
+    .timeline-item{display:flex;gap:16px;position:relative}
+    .timeline-item:not(:last-child)::after{content:'';position:absolute;left:18px;top:42px;width:2px;height:calc(100% - 12px);background:linear-gradient(to bottom,var(--accent-blue),transparent)}
+    .timeline-dot{width:38px;height:38px;border-radius:50%;background:rgba(79,157,255,.15);border:2px solid var(--accent-blue);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;margin-top:4px}
+    .timeline-content{padding-bottom:22px}
+    .timeline-content h4{font-family:var(--font-head);font-size:14px;font-weight:600;margin-bottom:4px}
+    .timeline-content p{font-size:12px;color:var(--text-secondary);line-height:1.55}
+    .glow-box{border-radius:var(--radius-lg);padding:24px 28px;position:relative;overflow:hidden;background:var(--grad-card);border:1px solid var(--border-glow)}
+    .mermaid-wrap{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:var(--radius);padding:18px;overflow-x:auto}
+    .mermaid svg{max-width:100%}
+    .check-list{list-style:none;display:flex;flex-direction:column;gap:9px}
+    .check-list li{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--text-secondary)}
+    .check-list li::before{content:'✦';color:var(--accent-cyan);font-size:11px;margin-top:2px;flex-shrink:0}
+    .metric-card{background:var(--grad-card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;text-align:center}
+    .metric-card .mval{font-family:var(--font-head);font-size:20px;font-weight:700;margin-bottom:4px}
+    .metric-card .mlbl{font-size:11px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.08em}
+    .slide-footer{margin-top:auto;padding-top:20px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
+    .slide-footer span{font-family:var(--font-mono);font-size:11px;color:var(--text-muted)}
+    .highlight-strip{background:linear-gradient(90deg,rgba(79,157,255,.1),rgba(155,135,245,.1),rgba(0,212,255,.1));border:1px solid rgba(79,157,255,.2);border-radius:var(--radius);padding:16px 22px;display:flex;align-items:center;gap:14px}
+    .highlight-strip .icon{font-size:22px;flex-shrink:0}
+    .highlight-strip p{font-size:13px;color:var(--text-secondary)}
+    .highlight-strip p strong{color:var(--text-primary)}
+    .partner-item{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;background:var(--grad-card);border:1px solid var(--border);border-radius:var(--radius);transition:border-color .2s,transform .2s}
+    .partner-item:hover{border-color:var(--border-glow);transform:translateY(-2px)}
+    .partner-icon{font-size:24px;flex-shrink:0}
+    .partner-info h4{font-size:13px;font-weight:600;margin-bottom:4px}
+    .partner-info p{font-size:12px;color:var(--text-secondary);line-height:1.5}
+    .phase-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;flex:1}
+    .phase-card{background:var(--grad-card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;position:relative;overflow:hidden}
+    .phase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+    .phase-card.q1::before{background:var(--accent-blue)}.phase-card.q2::before{background:var(--accent-violet)}.phase-card.q3::before{background:var(--accent-cyan)}.phase-card.q4::before{background:var(--accent-gold)}
+    .phase-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}
+    .phase-card.q1 .phase-label{color:var(--accent-blue)}.phase-card.q2 .phase-label{color:var(--accent-violet)}.phase-card.q3 .phase-label{color:var(--accent-cyan)}.phase-card.q4 .phase-label{color:var(--accent-gold)}
+    .phase-title{font-family:var(--font-head);font-size:14px;font-weight:700;margin-bottom:9px}
+    .phase-items{list-style:none;display:flex;flex-direction:column;gap:5px}
+    .phase-items li{font-size:11px;color:var(--text-secondary);display:flex;gap:5px}
+    .phase-items li::before{content:'›';color:var(--text-muted)}
+    .big-stat{text-align:center;padding:20px 14px}
+    .big-stat .num{font-family:var(--font-head);font-size:32px;font-weight:800;background:var(--grad-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .big-stat .desc{font-size:11px;color:var(--text-muted);margin-top:4px;text-transform:uppercase;letter-spacing:.07em}
+    .arch-row{display:grid;grid-template-columns:130px 1fr;gap:0;border-bottom:1px solid var(--border)}
+    .arch-row:last-child{border-bottom:none}
+    .arch-label{padding:11px 14px;font-size:11px;font-weight:600;font-family:var(--font-mono);color:var(--accent-cyan);background:rgba(0,212,255,.04);border-right:1px solid var(--border);display:flex;align-items:center}
+    .arch-value{padding:11px 14px;font-size:12px;color:var(--text-secondary);display:flex;align-items:center;flex-wrap:wrap;gap:5px}
+    .cta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px;flex:1;align-content:start}
+    .cta-item{background:var(--grad-card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;text-align:center}
+    .cta-item .emoji{font-size:26px;margin-bottom:9px}
+    .cta-item h4{font-size:13px;font-weight:600;margin-bottom:5px}
+    .cta-item p{font-size:12px;color:var(--text-secondary);line-height:1.5}
+    .quote-block{border-left:3px solid var(--accent-violet);padding:14px 18px;background:rgba(155,135,245,.06);border-radius:0 var(--radius) var(--radius) 0;font-size:14px;font-style:italic;color:var(--text-secondary);line-height:1.7}
+    .value-strip{display:flex;gap:10px;flex-wrap:wrap}
+    .value-chip{display:flex;align-items:center;gap:7px;padding:9px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:9px;font-size:12px;font-weight:500;flex:1;min-width:140px}
+    .value-chip .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+    .cover-logo{width:68px;height:68px;border-radius:18px;background:var(--grad-primary);display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:24px;box-shadow:0 0 40px rgba(79,157,255,.4)}
+    .cover-contact{margin-top:auto;padding-top:28px;border-top:1px solid var(--border);display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+    .cc-item{display:flex;flex-direction:column;gap:3px}
+    .cc-item .lbl{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);font-family:var(--font-mono)}
+    .cc-item .val{font-size:13px;color:var(--text-secondary)}
+    .ty-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px}
+    .ty-tagline{font-family:var(--font-head);font-size:clamp(17px,2.5vw,27px);font-weight:700;max-width:600px;line-height:1.35}
+    .ty-contact-grid{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+    .ty-chip{display:flex;align-items:center;gap:7px;background:var(--bg-card);border:1px solid var(--border);border-radius:9px;padding:9px 18px;font-size:12px;color:var(--text-secondary)}
+    .thumb-nav{display:none;position:fixed;left:0;top:58px;bottom:0;width:175px;background:rgba(5,8,17,.96);border-right:1px solid var(--border);overflow-y:auto;padding:14px 8px;flex-direction:column;gap:4px;z-index:90}
+    .thumb-nav.open{display:flex}
+    .thumb-item{display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:7px;cursor:pointer;transition:background .2s;border:1px solid transparent}
+    .thumb-item:hover{background:var(--bg-card-h)}.thumb-item.active{background:rgba(79,157,255,.1);border-color:rgba(79,157,255,.3)}
+    .thumb-num{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);min-width:18px}
+    .thumb-title{font-size:10px;color:var(--text-secondary);line-height:1.3}.thumb-item.active .thumb-title{color:var(--accent-blue)}
+    .progress-bar{position:fixed;bottom:0;left:0;height:2px;background:var(--grad-primary);transition:width .4s ease;z-index:200}
+    .notes-display{width:100%;max-width:1280px;display:none}
+    .notes-inner{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-top:2px solid var(--accent-gold);padding:18px 38px;font-size:13px;color:var(--text-secondary);line-height:1.7}
+    .notes-hdr{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-gold);font-family:var(--font-mono);margin-bottom:7px}
+    .key-hint{position:fixed;bottom:14px;right:18px;font-family:var(--font-mono);font-size:11px;color:var(--text-muted);background:rgba(5,8,17,.85);border:1px solid var(--border);padding:5px 11px;border-radius:7px;backdrop-filter:blur(10px)}
+    @media(max-width:1100px){.slide{padding:44px 36px}.cg4{grid-template-columns:repeat(2,1fr)}.phase-grid{grid-template-columns:repeat(2,1fr)}.two-col,.three-col{grid-template-columns:1fr;gap:18px}.cta-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.slide{padding:32px 22px}.cg3{grid-template-columns:1fr}.cg2{grid-template-columns:1fr}.cta-grid{grid-template-columns:1fr}}
+
+    /* ─── PRINT / PDF STYLES ─────────────────────────────────────────── */
+    @media print {
+      @page { size: 1280px 720px landscape; margin: 0; }
+
+      /* Hide all chrome */
+      .nav-bar, .thumb-nav, .progress-bar, .key-hint,
+      .notes-display, .slide-notes { display: none !important; }
+
+      body { background: #050811 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+      .presentation, .slides-viewport { margin: 0 !important; padding: 0 !important; max-width: none !important; width: 100% !important; }
+
+      /* Show ALL slides, each on its own page */
+      .slide {
+        display: flex !important;
+        width: 1280px !important;
+        min-height: 720px !important;
+        height: 720px !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        overflow: hidden !important;
+        position: relative !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Last slide — no trailing page break */
+      .slide:last-of-type {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+
+      /* Preserve gradient backgrounds */
+      .slide::before { display: block !important; }
+      .card, .glow-box, .partner-item, .phase-card,
+      .metric-card, .highlight-strip, .arch-row,
+      .cta-item, .mermaid-wrap { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+      /* Ensure mermaid SVGs are visible */
+      .mermaid svg { max-width: 100% !important; display: block !important; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <div class="nav-brand">🌍 Global Pay × BOT Chain</div>
+  <div class="nav-controls">
+    <button class="nav-btn" onclick="toggleThumb()">☰ Slides</button>
+    <span class="slide-counter" id="counter">1 / 20</span>
+    <button class="nav-btn" onclick="prevSlide()">← Prev</button>
+    <button class="nav-btn" onclick="nextSlide()">Next →</button>
+    <button class="notes-toggle" onclick="toggleNotes()">📝 Notes</button>
+  </div>
+</nav>
+
+<div class="thumb-nav" id="thumbNav"></div>
+<div class="progress-bar" id="progressBar" style="width:5%"></div>
+
+<div class="presentation">
+<div class="slides-viewport" id="slidesViewport">
+
+<!-- SLIDE 1 · COVER -->
+<section class="slide active" id="slide-1" data-title="Cover">
+  <span class="slide-num">01 / 20</span>
+  <div class="cover-logo">🌍</div>
+  <div class="slide-label">Ecosystem Partnership Proposal — July 2026</div>
+  <h1>Global Pay<br /><span class="gradient-text">× BOT Chain</span></h1>
+  <div class="divider"></div>
+  <p class="lead" style="margin-top:8px;">AI-Powered Blockchain Payment Infrastructure —<br />Built to Drive Real-World Adoption on BOT Chain.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:9px;margin-top:24px;">
+    <span class="pill pill-gold">Pre-Launch / MVP</span>
+    <span class="pill pill-blue">Fintech × Web3</span>
+    <span class="pill pill-violet">AI-Powered</span>
+    <span class="pill pill-cyan">EVM Native</span>
+    <span class="pill pill-teal">Confidential — Partnership Deck</span>
+  </div>
+  <div class="cover-contact">
+    <div class="cc-item"><span class="lbl">Project</span><span class="val">Global Pay</span></div>
+    <div class="cc-item"><span class="lbl">Website</span><span class="val">globalpay.io (placeholder)</span></div>
+    <div class="cc-item"><span class="lbl">Contact</span><span class="val">partnerships@globalpay.io</span></div>
+    <div class="cc-item"><span class="lbl">Deck Version</span><span class="val">v1.0 · July 2026</span></div>
+    <div class="cc-item"><span class="lbl">Audience</span><span class="val">BOT Chain Ecosystem Team</span></div>
+  </div>
+</section>
+<div class="slide-notes" id="notes-1" style="display:none"><strong>Speaker Notes — Slide 1 · Cover:</strong> Open with conviction. "This is a partnership deck — not a fundraise. We're here because we believe BOT Chain is the right ecosystem to build the future of intelligent payments." Let the logo and tagline speak first. Keep the intro to 30 seconds.</div>
+
+<!-- SLIDE 2 · EXECUTIVE SUMMARY -->
+<section class="slide" id="slide-2" data-title="Executive Summary">
+  <span class="slide-num">02 / 20</span>
+  <div class="slide-label">Executive Summary</div>
+  <h2>What is <span class="gradient-text">Global Pay?</span></h2>
+  <div class="divider"></div>
+  <div class="two-col" style="margin-top:22px;flex:1;align-items:start;">
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="card">
+        <div class="icon-box ib-blue">🏗️</div>
+        <h3 style="font-size:14px;margin-bottom:6px;">What We're Building</h3>
+        <p style="font-size:13px;color:var(--text-secondary);">A full-stack AI-powered payment infrastructure platform — combining intelligent payment routing, blockchain wallets, merchant tools, and developer APIs into one unified layer. Think Stripe + ThirdWeb + AI, purpose-built for Web3.</p>
+      </div>
+      <div class="card">
+        <div class="icon-box ib-violet">⚡</div>
+        <h3 style="font-size:14px;margin-bottom:6px;">The Problem We Solve</h3>
+        <p style="font-size:13px;color:var(--text-secondary);">Cross-border payments are slow and expensive. Blockchain payments lack merchant-grade UX. Developers have no unified fintech API. AI remains absent from payment infrastructure.</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="glow-box">
+        <div class="slide-label" style="margin-bottom:10px;font-size:10px;">Vision Statement</div>
+        <p style="font-size:15px;font-weight:500;line-height:1.65;color:var(--text-primary);">"To be the world's most intelligent payment infrastructure — abstracting blockchain complexity while delivering enterprise-grade financial tools powered by AI."</p>
+      </div>
+      <div class="card">
+        <div class="icon-box ib-gold">🕐</div>
+        <h3 style="font-size:14px;margin-bottom:6px;">Why Now?</h3>
+        <p style="font-size:13px;color:var(--text-secondary);">Blockchain infrastructure is maturing. AI is entering every financial vertical. Regulatory clarity is improving. The window to establish a dominant payment layer on an emerging chain is now — and BOT Chain is perfectly positioned.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-2" style="display:none"><strong>Speaker Notes — Slide 2 · Executive Summary:</strong> Keep to 90 seconds. Three beats: (1) Global Pay is infrastructure, not an app. (2) Timing is driven by real macro tailwinds. (3) BOT Chain is not one option — it's the strategic choice. Transition: "Let me show you the specific problems we're solving."</div>
+
+<!-- SLIDE 3 · THE PROBLEM -->
+<section class="slide" id="slide-3" data-title="The Problem">
+  <span class="slide-num">03 / 20</span>
+  <div class="slide-label">The Problem</div>
+  <h2>The Broken State of <span class="gradient-text">Global Payments</span></h2>
+  <div class="divider"></div>
+  <div class="card-grid cg3" style="margin-top:18px;gap:12px;flex:1;">
+    <div class="card">
+      <div class="icon-box ib-blue">🌐</div>
+      <h3 style="font-size:13px;margin-bottom:5px;">Cross-Border Friction</h3>
+      <p style="font-size:12px;color:var(--text-secondary);">SWIFT transfers take 2–5 days with 3–8% fees. Remittances lose value at every hop. No real-time settlement for SMBs or individuals transacting globally.</p>
+    </div>
+    <div class="card">
+      <div class="icon-box ib-violet">⛓️</div>
+      <h3 style="font-size:13px;margin-bottom:5px;">Blockchain UX Gap</h3>
+      <p style="font-size:12px;color:var(--text-secondary);">Seed phrases, volatile gas fees, network switching, and wallet fragmentation create insurmountable barriers for non-crypto users and mainstream merchants.</p>
+    </div>
+    <div class="card">
+      <div class="icon-box ib-cyan">🏪</div>
+      <h3 style="font-size:13px;margin-bottom:5px;">Merchant Onboarding Hell</h3>
+      <p style="font-size:12px;color:var(--text-secondary);">Merchants face weeks of integration time, multiple SDKs, inconsistent settlement finality, and zero AI support for managing complex payment workflows.</p>
+    </div>
+    <div class="card">
+      <div class="icon-box ib-teal">👛</div>
+      <h3 style="font-size:13px;margin-bottom:5px;">Wallet Fragmentation</h3>
+      <p style="font-size:12px;color:var(--text-secondary);">Users manage 5+ wallets across chains. No unified identity, no cross-chain balances, no single dashboard. Every wallet is an isolated island with no interoperability.</p>
+    </div>
+    <div class="card">
+      <div class="icon-box ib-gold">🤖</div>
+      <h3 style="font-size:13px;margin-bottom:5px;">Zero AI in Finance Ops</h3>
+      <p style="font-size:12px;color:var(--text-secondary);">Financial workflows — invoicing, reconciliation, fraud detection, routing — still rely on brittle rule engines. AI has not yet entered payment infrastructure meaningfully.</p>
+    </div>
+    <div class="card">
+      <div class="icon-box ib-blue">👨‍💻</div>
+      <h3 style="font-size:13px;margin-bottom:5px;">Poor Developer Experience</h3>
+      <p style="font-size:12px;color:var(--text-secondary);">Building on-chain payment flows requires integrating 8–12 separate services. No unified fintech API exists combining wallets, contracts, AI, and fiat rails in one SDK.</p>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-3" style="display:none"><strong>Speaker Notes — Slide 3 · The Problem:</strong> Ground every problem in real industry observations. The goal: create urgency. "These aren't edge cases — they are the everyday reality for billions transacting globally." Pause on 'Merchant Onboarding' — that's where BOT Chain can relate: every ecosystem struggles to get quality merchant coverage.</div>
+
+<!-- SLIDE 4 · THE SOLUTION -->
+<section class="slide" id="slide-4" data-title="The Solution">
+  <span class="slide-num">04 / 20</span>
+  <div class="slide-label">The Solution</div>
+  <h2>Global Pay: <span class="gradient-text">One Platform, Every Layer</span></h2>
+  <div class="divider"></div>
+  <div class="two-col" style="margin-top:18px;gap:18px;flex:1;align-items:start;">
+    <div style="display:flex;flex-direction:column;gap:11px;">
+      <div class="partner-item">
+        <div class="partner-icon">🧠</div>
+        <div class="partner-info"><h4>AI Payment Engine</h4><p>Natural-language payment commands, intelligent routing, real-time fraud detection, and automated financial insights — AI-native from the ground up, not bolted on.</p></div>
+      </div>
+      <div class="partner-item">
+        <div class="partner-icon">⛓️</div>
+        <div class="partner-info"><h4>Blockchain Wallet Layer</h4><p>Account abstraction wallets (ERC-4337) with gasless UX. Custodial and non-custodial options. PayTag identity system for human-readable on-chain addresses.</p></div>
+      </div>
+      <div class="partner-item">
+        <div class="partner-icon">🔌</div>
+        <div class="partner-info"><h4>Developer APIs & SDK</h4><p>RESTful and SDK-based APIs covering wallets, payments, smart contracts, AI workflows, and settlement — one integration, full-stack fintech capability.</p></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:11px;">
+      <div class="partner-item">
+        <div class="partner-icon">🏪</div>
+        <div class="partner-info"><h4>Merchant Dashboard</h4><p>White-label merchant portal with real-time analytics, AI-assisted reconciliation, multi-currency support, and one-click BOT Chain payment acceptance.</p></div>
+      </div>
+      <div class="partner-item">
+        <div class="partner-icon">🌉</div>
+        <div class="partner-info"><h4>Smart Bridge (Fiat ↔ Crypto)</h4><p>Auto-bridge tokenizes local fiat into on-chain stablecoins (pUSDC). Atomic settlement. Zero gas-fee exposure to end users. Works 24/7, 365 days.</p></div>
+      </div>
+      <div class="partner-item">
+        <div class="partner-icon">📊</div>
+        <div class="partner-info"><h4>AI Payment Routing & Automation</h4><p>AI-driven dynamic routing selects the optimal settlement rail per transaction — minimising latency, cost, and slippage. Trigger-based automation for recurring payments.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-4" style="display:none"><strong>Speaker Notes — Slide 4 · Solution:</strong> Map each solution back to the problem from Slide 3. Key insight to land: "This is infrastructure, not a consumer app — it integrates with BOT Chain at the protocol level." The Smart Bridge is the most visually compelling — spend extra time here.</div>
+
+<!-- SLIDE 5 · MARKET OPPORTUNITY -->
+<section class="slide" id="slide-5" data-title="Market Opportunity">
+  <span class="slide-num">05 / 20</span>
+  <div class="slide-label">Market Opportunity</div>
+  <h2>A <span class="gradient-text">Trillion-Dollar</span> Intersection</h2>
+  <div class="divider"></div>
+  <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:24px;margin-top:18px;flex:1;align-items:start;">
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="highlight-strip">
+        <div class="icon">🎯</div>
+        <div><p><strong>TAM — Global Payments Infrastructure</strong><br />The global digital payments market is projected to exceed $20 trillion in annual transaction value by 2030 (McKinsey). Blockchain's share is accelerating across all verticals.</p></div>
+      </div>
+      <div class="highlight-strip" style="background:linear-gradient(90deg,rgba(155,135,245,.1),rgba(0,212,255,.1));">
+        <div class="icon">🎯</div>
+        <div><p><strong>SAM — Web3 Fintech & Merchant Payments</strong><br />Blockchain-native payment adoption across DeFi, gaming, e-commerce, and B2B remittances — a rapidly growing segment seeking developer-friendly, AI-augmented infrastructure.</p></div>
+      </div>
+      <div class="highlight-strip" style="background:linear-gradient(90deg,rgba(0,229,204,.1),rgba(79,157,255,.1));">
+        <div class="icon">🎯</div>
+        <div><p><strong>SOM — BOT Chain Ecosystem & Early Adopters</strong><br />Merchants, developers, and enterprises seeking to deploy on BOT Chain. Global Pay serves as the first production-grade payment layer on BOT Chain's ecosystem.</p></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <p style="font-size:13px;color:var(--text-secondary);font-weight:500;">Target Customer Segments</p>
+      <div class="card-grid cg2" style="gap:9px;">
+        <div class="metric-card"><div class="mval">👨‍💻</div><div class="mlbl" style="margin-top:5px;">Developers</div><p style="font-size:10px;color:var(--text-muted);margin-top:3px;">Web3 builders needing a unified fintech API</p></div>
+        <div class="metric-card"><div class="mval">🏢</div><div class="mlbl" style="margin-top:5px;">Enterprise</div><p style="font-size:10px;color:var(--text-muted);margin-top:3px;">B2B payments, payroll, cross-border</p></div>
+        <div class="metric-card"><div class="mval">🏪</div><div class="mlbl" style="margin-top:5px;">Merchants</div><p style="font-size:10px;color:var(--text-muted);margin-top:3px;">E-commerce accepting crypto payments</p></div>
+        <div class="metric-card"><div class="mval">🌐</div><div class="mlbl" style="margin-top:5px;">Web3 / Fintech</div><p style="font-size:10px;color:var(--text-muted);margin-top:3px;">DeFi protocols, wallets, neobanks</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-5" style="display:none"><strong>Speaker Notes — Slide 5 · Market:</strong> Be honest — we're at the SOM stage. The point of TAM/SAM is to show irreversible growth. Position Global Pay as the "payment middleware" that every BOT Chain merchant and developer will eventually need. BOT Chain's growth directly expands our SOM.</div>
+
+<!-- SLIDE 6 · PRODUCT WALKTHROUGH -->
+<section class="slide" id="slide-6" data-title="Product Walkthrough">
+  <span class="slide-num">06 / 20</span>
+  <div class="slide-label">Product Walkthrough</div>
+  <h2>End-to-End <span class="gradient-text">Payment Flow</span></h2>
+  <div class="divider"></div>
+  <div class="timeline" style="margin-top:22px;flex:1;">
+    <div class="timeline-item">
+      <div class="timeline-dot">👤</div>
+      <div class="timeline-content">
+        <h4>1. Customer Onboarding</h4>
+        <p>User registers via Web2-style UI. KYC processed (Bank KYC → UPI ID for fiat; Web3 KYC via wallet connection → PayTag assigned). Account abstraction wallet auto-provisioned on BOT Chain. No seed phrase exposure.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">💳</div>
+      <div class="timeline-content">
+        <h4>2. Fiat On-Ramp & Smart Bridge</h4>
+        <p>User deposits local fiat via Stripe integration. Smart bridge contract mints equivalent pUSDC into the internal vault on BOT Chain. Settlement is instant. Zero gas exposure to user. Bridge operates 24/7.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">🤖</div>
+      <div class="timeline-content">
+        <h4>3. AI-Assisted Payment Command</h4>
+        <p>User types: "Send $10 to @merchant." AI parses intent → resolves PayTag → constructs 4-step atomic transaction (Fiat → pUSDC → BOT Chain Transfer → Merchant Settlement) — completed in under 12 seconds with zero gas to user.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">🏪</div>
+      <div class="timeline-content">
+        <h4>4. Merchant Settlement & Dashboard</h4>
+        <p>Merchant receives real-time payment notification. Dashboard shows live analytics, transaction hashes (verifiable on BOT Chain Explorer), AI-assisted reconciliation, and one-click fiat withdrawal.</p>
+      </div>
+    </div>
+    <div class="timeline-item" style="padding-bottom:0;">
+      <div class="timeline-dot">📊</div>
+      <div class="timeline-content" style="padding-bottom:0;">
+        <h4>5. Activity Logs & AI Insights</h4>
+        <p>Sent/Received graphs update in real time. AI surfaces anomalies, spending patterns, and optimisation suggestions. All transactions permanently recorded on BOT Chain — verifiable, transparent, immutable.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-6" style="display:none"><strong>Speaker Notes — Slide 6 · Product Walkthrough:</strong> Walk through this like a live demo narration. The wow moment is Step 3 — the AI-assisted atomic transaction. "The user never knows they're on a blockchain. To them it feels like a neobank. To BOT Chain, it's a high-frequency on-chain transaction stream." That's the ecosystem value proposition in one sentence.</div>
+
+<!-- SLIDE 7 · TECHNICAL ARCHITECTURE -->
+<section class="slide" id="slide-7" data-title="Technical Architecture">
+  <span class="slide-num">07 / 20</span>
+  <div class="slide-label">Technical Architecture</div>
+  <h2>System <span class="gradient-text">Architecture</span></h2>
+  <div class="divider"></div>
+  <div style="margin-top:16px;flex:1;display:flex;flex-direction:column;gap:16px;">
+    <div class="mermaid-wrap">
+      <div class="mermaid">
+graph TB
+  subgraph FE["🖥️ Frontend Layer"]
+    UI["React / Vite UI"]
+    MD["Merchant Dashboard"]
+    DP["Developer Portal"]
+  end
+  subgraph AI["🧠 AI Layer"]
+    NLP["Intent Parser LLM"]
+    RT["Smart Router"]
+    FD["Fraud Detection"]
+    INS["Insights Engine"]
+  end
+  subgraph BE["⚙️ Backend Layer"]
+    API["Node.js / Express API"]
+    AUTH["Auth & KYC Service"]
+    WS["Wallet Service"]
+    PAY["Payment Orchestrator"]
+    DB["MongoDB Atlas"]
+  end
+  subgraph BC["⛓️ BOT Chain Layer"]
+    SC["Smart Contracts Solidity"]
+    AA["Account Abstraction ERC-4337"]
+    BR["Auto-Bridge Contract"]
+    EXP["BOT Chain Explorer"]
+  end
+  subgraph EXT["🔌 External Rails"]
+    STRIPE["Stripe Fiat On-Ramp"]
+    ORC["Price Oracle"]
+    KYC["KYC Provider"]
+  end
+  UI --> API
+  MD --> API
+  DP --> API
+  API --> NLP
+  NLP --> RT
+  RT --> PAY
+  PAY --> SC
+  PAY --> STRIPE
+  API --> AUTH
+  AUTH --> KYC
+  WS --> AA
+  SC --> BR
+  BR --> EXP
+  API --> DB
+  RT --> FD
+  FD --> INS
+  SC --> ORC
+  style FE fill:#0d1b2e,stroke:#4F9DFF,color:#F0F4FF
+  style AI fill:#1a0d2e,stroke:#9B87F5,color:#F0F4FF
+  style BE fill:#0d1f1e,stroke:#00D4FF,color:#F0F4FF
+  style BC fill:#1a1a0d,stroke:#FFD166,color:#F0F4FF
+  style EXT fill:#1a0d0d,stroke:#00E5CC,color:#F0F4FF
+      </div>
+    </div>
+    <div class="card-grid cg4" style="gap:9px;">
+      <div style="padding:11px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:9px;text-align:center;">
+        <div style="font-size:17px;margin-bottom:4px;">⚛️</div>
+        <div style="font-size:11px;color:var(--accent-blue);font-family:var(--font-mono);">Frontend</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">React + Vite + TailwindCSS</div>
+      </div>
+      <div style="padding:11px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:9px;text-align:center;">
+        <div style="font-size:17px;margin-bottom:4px;">🟢</div>
+        <div style="font-size:11px;color:var(--accent-cyan);font-family:var(--font-mono);">Backend</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">Node.js + Express + MongoDB</div>
+      </div>
+      <div style="padding:11px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:9px;text-align:center;">
+        <div style="font-size:17px;margin-bottom:4px;">🔗</div>
+        <div style="font-size:11px;color:var(--accent-gold);font-family:var(--font-mono);">Web3 SDK</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">ThirdWeb + Solidity + EVM</div>
+      </div>
+      <div style="padding:11px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:9px;text-align:center;">
+        <div style="font-size:17px;margin-bottom:4px;">🧠</div>
+        <div style="font-size:11px;color:var(--accent-violet);font-family:var(--font-mono);">AI Layer</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">LLM APIs + Intent Parser</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-7" style="display:none"><strong>Speaker Notes — Slide 7 · Architecture:</strong> Walk the diagram top-down. Key points: (1) AI layer sits between frontend and backend — it's not bolted on. (2) Blockchain layer is isolated and swappable — migrating from Sepolia to BOT Chain mainnet is a config change, not a rewrite. (3) Security at every layer. Technical teams will appreciate clean separation of concerns.</div>
+
+<!-- SLIDE 8 · AI CAPABILITIES -->
+<section class="slide" id="slide-8" data-title="AI Capabilities">
+  <span class="slide-num">08 / 20</span>
+  <div class="slide-label">AI Capabilities</div>
+  <h2>Intelligence at <span class="gradient-text">Every Payment Layer</span></h2>
+  <div class="divider"></div>
+  <div class="two-col" style="margin-top:18px;gap:18px;flex:1;align-items:start;">
+    <div style="display:flex;flex-direction:column;gap:11px;">
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><div class="icon-box ib-violet" style="margin-bottom:0;">🗣️</div><h3 style="font-size:14px;">AI Payment Assistant</h3></div>
+        <p style="font-size:12px;color:var(--text-secondary);">Natural-language interface — users describe payments in plain English. AI resolves recipient identity, constructs the transaction, selects the optimal rail, and executes atomically. No manual form filling required.</p>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><div class="icon-box ib-blue" style="margin-bottom:0;">🛣️</div><h3 style="font-size:14px;">Smart Routing Engine</h3></div>
+        <p style="font-size:12px;color:var(--text-secondary);">AI evaluates gas cost, latency, liquidity, and settlement certainty in real time. Selects optimal route across chains and fiat rails. Reduces cost by routing intelligently — not blindly.</p>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><div class="icon-box ib-red" style="margin-bottom:0;">🛡️</div><h3 style="font-size:14px;">Fraud Detection Engine</h3></div>
+        <p style="font-size:12px;color:var(--text-secondary);">Behavioural anomaly detection on every transaction. Flags suspicious wallet activity, unusual transfer patterns, and velocity spikes before execution. On-chain risk scoring integrated.</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:11px;">
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><div class="icon-box ib-teal" style="margin-bottom:0;">📈</div><h3 style="font-size:14px;">Transaction Insights</h3></div>
+        <p style="font-size:12px;color:var(--text-secondary);">AI-generated spending summaries, merchant analytics, and cash-flow forecasts. Reconciliation reports generated automatically. Dashboard powered entirely by AI insights engine.</p>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:9px;"><div class="icon-box ib-gold" style="margin-bottom:0;">⚙️</div><h3 style="font-size:14px;">Workflow Automation</h3></div>
+        <p style="font-size:12px;color:var(--text-secondary);">Trigger-based payment automation: scheduled transfers, conditional payments, recurring subscriptions, and multi-step B2B flows — all managed by AI without manual intervention.</p>
+      </div>
+      <div class="glow-box">
+        <div class="slide-label" style="margin-bottom:9px;font-size:9px;">Future AI Roadmap</div>
+        <ul class="check-list" style="gap:6px;">
+          <li>Multichain AI routing with cross-chain liquidity intelligence</li>
+          <li>On-chain reputation scoring using wallet transaction history</li>
+          <li>AI-generated smart contract audits for merchant integrations</li>
+          <li>Predictive settlement — pre-positioning liquidity before transactions</li>
+          <li>Conversational API — AI as a first-class developer interface</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-8" style="display:none"><strong>Speaker Notes — Slide 8 · AI:</strong> Key message: "AI is not a feature — it's the architecture." Every layer of Global Pay has an AI component. For BOT Chain, this means on-chain activity generated by AI is structured, high-quality, meaningful transaction data that enhances chain analytics and ecosystem health metrics.</div>
+
+<!-- SLIDE 9 · BLOCKCHAIN INTEGRATION -->
+<section class="slide" id="slide-9" data-title="Blockchain Integration">
+  <span class="slide-num">09 / 20</span>
+  <div class="slide-label">Blockchain Integration</div>
+  <h2>Blockchain-Native <span class="gradient-text">from Day One</span></h2>
+  <div class="divider"></div>
+  <div class="two-col" style="margin-top:18px;gap:22px;flex:1;align-items:start;">
+    <div>
+      <p style="font-size:12px;color:var(--text-secondary);font-weight:500;margin-bottom:11px;text-transform:uppercase;letter-spacing:.08em;font-family:var(--font-mono);">Current Architecture</p>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+        <div class="arch-row"><div class="arch-label">Network</div><div class="arch-value"><span class="pill pill-blue">Ethereum Sepolia L2</span></div></div>
+        <div class="arch-row"><div class="arch-label">Wallets</div><div class="arch-value"><span class="pill pill-violet">Account Abstraction</span><span class="pill pill-cyan">MetaMask</span></div></div>
+        <div class="arch-row"><div class="arch-label">Contracts</div><div class="arch-value"><span class="pill pill-gold">Solidity EVM</span> pUSDC Mock</div></div>
+        <div class="arch-row"><div class="arch-label">SDK</div><div class="arch-value"><span class="pill pill-teal">ThirdWeb SDK</span></div></div>
+        <div class="arch-row"><div class="arch-label">Identity</div><div class="arch-value">PayTag System + Gitcoin Passport</div></div>
+        <div class="arch-row"><div class="arch-label">Status</div><div class="arch-value"><span class="pill pill-gold">Pre-Launch / MVP</span></div></div>
+      </div>
+      <div class="highlight-strip" style="margin-top:12px;">
+        <div class="icon">🔁</div>
+        <p><strong>EVM Compatibility</strong> — All smart contracts are written in Solidity targeting EVM. BOT Chain (EVM-compatible) enables direct redeployment with zero contract rewrites required.</p>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:12px;color:var(--text-secondary);font-weight:500;margin-bottom:11px;text-transform:uppercase;letter-spacing:.08em;font-family:var(--font-mono);">Multichain Strategy</p>
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <div class="partner-item" style="padding:13px 15px;"><div class="partner-icon" style="font-size:19px;">🥇</div><div class="partner-info"><h4>Phase 1 — BOT Chain (Primary Settlement)</h4><p>Full deployment on BOT Chain mainnet as primary settlement layer. All user wallets, merchant payments, and smart contracts anchored on BOT Chain.</p></div></div>
+        <div class="partner-item" style="padding:13px 15px;"><div class="partner-icon" style="font-size:19px;">🥈</div><div class="partner-info"><h4>Phase 2 — EVM Multichain Expansion</h4><p>Expand to additional EVM chains via bridge architecture. BOT Chain remains primary settlement destination — cross-chain liquidity aggregated back to BOT Chain.</p></div></div>
+        <div class="partner-item" style="padding:13px 15px;"><div class="partner-icon" style="font-size:19px;">🥉</div><div class="partner-info"><h4>Phase 3 — Non-EVM Interoperability</h4><p>Cross-chain messaging for non-EVM chains. BOT Chain acts as hub in a spoke-and-hub settlement model — the central clearing layer for all rails.</p></div></div>
+        <div class="card" style="padding:13px 15px;">
+          <h4 style="font-size:12px;margin-bottom:5px;color:var(--accent-cyan);">Gas Optimization</h4>
+          <ul class="check-list" style="gap:5px;">
+            <li style="font-size:11px;">Gasless UX via account abstraction (ERC-4337)</li>
+            <li style="font-size:11px;">Batch transactions to minimise per-tx cost</li>
+            <li style="font-size:11px;">Gas rebate programs with BOT Chain ecosystem</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-9" style="display:none"><strong>Speaker Notes — Slide 9 · Blockchain:</strong> Critical technical message: "We're not asking you to build anything new for us. We're EVM-native — we redeploy existing contracts on BOT Chain. The ask is deployment support, not custom development." The multichain strategy positions BOT Chain as the anchor, not just one of many chains.</div>
+
+<!-- SLIDE 10 · WHY BOT CHAIN -->
+<section class="slide" id="slide-10" data-title="Why BOT Chain">
+  <span class="slide-num">10 / 20</span>
+  <div class="slide-label">Strategic Rationale</div>
+  <h2>Why <span class="gradient-text">BOT Chain</span> is the Right Ecosystem</h2>
+  <div class="divider"></div>
+  <div class="card-grid cg3" style="margin-top:18px;gap:12px;flex:1;">
+    <div class="card"><div class="icon-box ib-blue">⚡</div><h3 style="font-size:13px;margin-bottom:5px;">High Throughput & Low Latency</h3><p style="font-size:12px;color:var(--text-secondary);">Payment infrastructure demands sub-second finality. BOT Chain's architecture is designed for high-frequency transaction workloads — exactly what Global Pay generates at scale.</p></div>
+    <div class="card"><div class="icon-box ib-teal">💰</div><h3 style="font-size:13px;margin-bottom:5px;">Low Transaction Fees</h3><p style="font-size:12px;color:var(--text-secondary);">Micro-payment viability requires near-zero gas. BOT Chain's fee model makes everyday consumer payments economically rational — enabling mass merchant adoption from day one.</p></div>
+    <div class="card"><div class="icon-box ib-violet">🛠️</div><h3 style="font-size:13px;margin-bottom:5px;">EVM Compatibility</h3><p style="font-size:12px;color:var(--text-secondary);">Our entire smart contract suite (Solidity, ERC-4337, pUSDC) deploys directly with zero rewrites. No migration risk. No new development cost. Immediate deployment readiness.</p></div>
+    <div class="card"><div class="icon-box ib-gold">🌱</div><h3 style="font-size:13px;margin-bottom:5px;">Ecosystem Growth Stage</h3><p style="font-size:12px;color:var(--text-secondary);">Being an early ecosystem partner on an emerging chain provides first-mover advantage in the payments vertical — before competitors identify and enter the space.</p></div>
+    <div class="card"><div class="icon-box ib-cyan">🤝</div><h3 style="font-size:13px;margin-bottom:5px;">Developer Community</h3><p style="font-size:12px;color:var(--text-secondary);">BOT Chain's active developer community aligns with Global Pay's API-first strategy. Hackathons, grants, and workshops create immediate distribution channels for our SDK.</p></div>
+    <div class="card"><div class="icon-box ib-blue">🗺️</div><h3 style="font-size:13px;margin-bottom:5px;">Roadmap Alignment</h3><p style="font-size:12px;color:var(--text-secondary);">BOT Chain's expansion roadmap — DeFi, RWA, enterprise adoption — maps directly to Global Pay's product verticals: merchant payments, B2B rails, and institutional settlement.</p></div>
+  </div>
+  <div class="glow-box" style="margin-top:14px;padding:16px 22px;">
+    <p style="font-size:14px;text-align:center;font-style:italic;color:var(--text-secondary);">"BOT Chain is not our chain of last resort. It's our chain of <strong style="color:var(--text-primary);">first choice</strong> — the ecosystem we're building <em>with</em>, not just <em>on</em>."</p>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-10" style="display:none"><strong>Speaker Notes — Slide 10 · Why BOT Chain:</strong> Emotional and strategic close. Don't read the cards — instead: "We evaluated the EVM ecosystem landscape. BOT Chain was the clear answer." The quote should be said verbatim, slowly. It signals genuine commitment, not chain-hopping. This lands the conviction that should carry into the integration plan slides.</div>
+
+<!-- SLIDE 11 · BOT CHAIN INTEGRATION PLAN -->
+<section class="slide" id="slide-11" data-title="BOT Chain Integration Plan">
+  <span class="slide-num">11 / 20</span>
+  <div class="slide-label">Technical Deployment Plan</div>
+  <h2>BOT Chain <span class="gradient-text">Integration Timeline</span></h2>
+  <div class="divider"></div>
+  <div style="margin-top:16px;flex:1;display:flex;flex-direction:column;gap:14px;">
+    <div class="mermaid-wrap" style="padding:14px;">
+      <div class="mermaid">
+gantt
+  title Global Pay × BOT Chain — Deployment Timeline
+  dateFormat  YYYY-MM-DD
+  axisFormat  %b %Y
+  section Preparation
+    Smart Contract Audit & Adaptation   :a1, 2026-08-01, 21d
+    BOT Chain Testnet RPC Setup         :a2, 2026-08-01, 14d
+    SDK & Wallet Integration            :a3, 2026-08-10, 21d
+  section Testnet
+    Smart Contract Deployment Testnet   :b1, 2026-08-22, 14d
+    End-to-End QA Testing               :b2, 2026-09-05, 21d
+    BOT Chain Explorer Verification     :b3, 2026-09-05, 14d
+  section Mainnet Launch
+    BOT Chain Mainnet Deployment        :c1, 2026-10-01, 14d
+    Bridge and Token Integration        :c2, 2026-10-01, 21d
+    Merchant Onboarding Program         :c3, 2026-10-15, 30d
+  section Growth
+    Developer SDK Public Release        :d1, 2026-11-01, 30d
+    Co-Marketing and Hackathons         :d2, 2026-11-15, 45d
+      </div>
+    </div>
+    <div class="card-grid cg4" style="gap:9px;">
+      <div class="card" style="padding:13px 15px;"><div style="font-size:15px;margin-bottom:5px;">📜</div><div style="font-size:11px;font-weight:600;margin-bottom:3px;">Smart Contracts</div><p style="font-size:11px;color:var(--text-secondary);">pUSDC, PayTag Registry, Bridge, Payment Router — all redeployed on BOT Chain EVM</p></div>
+      <div class="card" style="padding:13px 15px;"><div style="font-size:15px;margin-bottom:5px;">🔗</div><div style="font-size:11px;font-weight:600;margin-bottom:3px;">RPC & Explorer</div><p style="font-size:11px;color:var(--text-secondary);">Integrated with BOT Chain RPC. Transaction verification via BOT Chain Explorer API</p></div>
+      <div class="card" style="padding:13px 15px;"><div style="font-size:15px;margin-bottom:5px;">👛</div><div style="font-size:11px;font-weight:600;margin-bottom:3px;">Wallet & AA</div><p style="font-size:11px;color:var(--text-secondary);">ERC-4337 wallets provisioned on BOT Chain. Gasless UX fully maintained at mainnet</p></div>
+      <div class="card" style="padding:13px 15px;"><div style="font-size:15px;margin-bottom:5px;">🧰</div><div style="font-size:11px;font-weight:600;margin-bottom:3px;">Developer SDK</div><p style="font-size:11px;color:var(--text-secondary);">Global Pay SDK ships with BOT Chain as default network in all documentation</p></div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-11" style="display:none"><strong>Speaker Notes — Slide 11 · Integration Plan:</strong> Be specific about timelines but acknowledge the dependency on BOT Chain support. Key ask: "With deployment support from BOT Chain's technical team, we can compress Phase 1 from 3 months to 6 weeks." The Gantt shows we're serious — this is a working deployment plan, not a whitepaper.</div>
+
+<!-- SLIDE 12 · VALUE TO BOT CHAIN -->
+<section class="slide" id="slide-12" data-title="Value to BOT Chain">
+  <span class="slide-num">12 / 20</span>
+  <div class="slide-label">Value Delivered to BOT Chain</div>
+  <h2>What Global Pay <span class="gradient-text">Brings to the Ecosystem</span></h2>
+  <div class="divider"></div>
+  <div class="card-grid cg3" style="margin-top:18px;gap:12px;flex:1;">
+    <div class="card"><div class="icon-box ib-blue">📊</div><h3 style="font-size:13px;margin-bottom:5px;">On-Chain Transaction Volume</h3><p style="font-size:12px;color:var(--text-secondary);">Every payment, wallet creation, and merchant settlement generates verifiable on-chain activity — boosting BOT Chain's TPS metrics, explorer activity, and ecosystem health scores.</p></div>
+    <div class="card"><div class="icon-box ib-violet">👨‍💻</div><h3 style="font-size:13px;margin-bottom:5px;">Developer Adoption</h3><p style="font-size:12px;color:var(--text-secondary);">Global Pay's developer SDK ships BOT Chain as the default network. Every developer building on Global Pay's API becomes a BOT Chain developer by default.</p></div>
+    <div class="card"><div class="icon-box ib-cyan">🏪</div><h3 style="font-size:13px;margin-bottom:5px;">Merchant Ecosystem Growth</h3><p style="font-size:12px;color:var(--text-secondary);">Every merchant onboarded to Global Pay accepts BOT Chain payments. Real-world merchant coverage strengthens BOT Chain's case for enterprise and institutional interest.</p></div>
+    <div class="card"><div class="icon-box ib-teal">👛</div><h3 style="font-size:13px;margin-bottom:5px;">Wallet Count Growth</h3><p style="font-size:12px;color:var(--text-secondary);">Each Global Pay user = a new on-chain wallet on BOT Chain. Account abstraction wallets are provisioned automatically — growing BOT Chain's active wallet count organically.</p></div>
+    <div class="card"><div class="icon-box ib-gold">🎪</div><h3 style="font-size:13px;margin-bottom:5px;">Hackathons & dApp Seeding</h3><p style="font-size:12px;color:var(--text-secondary);">Global Pay co-hosts BOT Chain hackathons. Our API becomes the payment layer for hackathon projects — seeding the next generation of BOT Chain payment dApps.</p></div>
+    <div class="card"><div class="icon-box ib-blue">📣</div><h3 style="font-size:13px;margin-bottom:5px;">Community & Press Growth</h3><p style="font-size:12px;color:var(--text-secondary);">Joint announcements and co-marketing campaigns increase BOT Chain's brand visibility in fintech and Web3 press — reaching audiences beyond native crypto communities.</p></div>
+  </div>
+  <div class="value-strip" style="margin-top:12px;">
+    <div class="value-chip"><div class="dot" style="background:var(--accent-blue);"></div>More Wallets</div>
+    <div class="value-chip"><div class="dot" style="background:var(--accent-violet);"></div>More Developers</div>
+    <div class="value-chip"><div class="dot" style="background:var(--accent-cyan);"></div>More Transactions</div>
+    <div class="value-chip"><div class="dot" style="background:var(--accent-teal);"></div>More Merchants</div>
+    <div class="value-chip"><div class="dot" style="background:var(--accent-gold);"></div>More dApps</div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-12" style="display:none"><strong>Speaker Notes — Slide 12 · Value to BOT Chain:</strong> Flip the conversation here — "Let's talk about what YOU get." Every ecosystem team evaluates partners by one question: "Does this make our chain more valuable?" Walk through the value chips: each one is a KPI BOT Chain's BD team tracks. Global Pay contributes to every single one.</div>
+
+<!-- SLIDE 13 · BUSINESS MODEL -->
+<section class="slide" id="slide-13" data-title="Business Model">
+  <span class="slide-num">13 / 20</span>
+  <div class="slide-label">Business Model</div>
+  <h2>Revenue Streams & <span class="gradient-text">Monetisation Strategy</span></h2>
+  <div class="divider"></div>
+  <div class="two-col" style="margin-top:20px;gap:22px;flex:1;align-items:start;">
+    <div style="display:flex;flex-direction:column;gap:11px;">
+      <div class="partner-item"><div class="partner-icon">💸</div><div class="partner-info"><h4>Transaction Fees</h4><p>Small percentage fee on fiat-to-crypto conversions and cross-border settlements. Volume-tiered pricing for merchants and enterprise accounts to incentivise scale.</p></div></div>
+      <div class="partner-item"><div class="partner-icon">🔌</div><div class="partner-info"><h4>API Access (Developer Tier)</h4><p>Free tier for developers (rate-limited). Paid production tiers metered by API calls, wallets managed, and transaction volume. Standard SaaS metered model.</p></div></div>
+      <div class="partner-item"><div class="partner-icon">🏢</div><div class="partner-info"><h4>Enterprise Licensing</h4><p>White-label payment infrastructure for banks, neobanks, and enterprise clients. Custom SLA, dedicated infrastructure, compliance support. Annual contract model.</p></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:11px;">
+      <div class="partner-item"><div class="partner-icon">🧠</div><div class="partner-info"><h4>Premium AI Features</h4><p>Advanced AI insights, automated reconciliation, fraud detection SLAs, and AI-powered financial forecasting available as premium subscription tiers for merchants and enterprises.</p></div></div>
+      <div class="partner-item"><div class="partner-icon">🏪</div><div class="partner-info"><h4>Merchant Services SaaS</h4><p>Monthly subscription for merchant dashboard — analytics, AI reconciliation, multi-currency support, and dedicated account management. Tiered by merchant transaction volume.</p></div></div>
+      <div class="glow-box">
+        <div class="slide-label" style="margin-bottom:7px;font-size:9px;">Current Revenue Status</div>
+        <p style="font-size:15px;color:var(--accent-gold);font-weight:700;margin-bottom:7px;">Pre-Launch / MVP</p>
+        <p style="font-size:12px;color:var(--text-secondary);">Revenue model defined. No live revenue yet. Commercial launch planned post BOT Chain mainnet deployment. Every dollar of Global Pay revenue correlates to on-chain activity that benefits the BOT Chain ecosystem.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-13" style="display:none"><strong>Speaker Notes — Slide 13 · Business Model:</strong> Be transparent about pre-revenue status — this is a partnership deck, not a fundraise. The important message: "Our revenue model is not extractive from BOT Chain. Transaction fees generate on-chain volume. Every dollar of Global Pay revenue correlates to on-chain activity that benefits the ecosystem."</div>
+
+<!-- SLIDE 14 · ROADMAP -->
+<section class="slide" id="slide-14" data-title="Roadmap">
+  <span class="slide-num">14 / 20</span>
+  <div class="slide-label">Product Roadmap</div>
+  <h2>Building the <span class="gradient-text">Future Together</span></h2>
+  <div class="divider"></div>
+  <div class="phase-grid" style="margin-top:20px;flex:1;">
+    <div class="phase-card q1">
+      <div class="phase-label">Phase 1 · Q3 2026</div>
+      <div class="phase-title">Foundation</div>
+      <ul class="phase-items">
+        <li>MVP stabilisation</li>
+        <li>BOT Chain testnet deployment</li>
+        <li>Smart contract audit</li>
+        <li>Core API finalisation</li>
+        <li>KYC/AML integration</li>
+        <li>Internal beta testing</li>
+      </ul>
+      <span class="pill pill-blue" style="margin-top:12px;font-size:10px;">In Progress</span>
+    </div>
+    <div class="phase-card q2">
+      <div class="phase-label">Phase 2 · Q4 2026</div>
+      <div class="phase-title">BOT Chain Launch</div>
+      <ul class="phase-items">
+        <li>BOT Chain mainnet deployment</li>
+        <li>Merchant onboarding program</li>
+        <li>Developer SDK v1.0 release</li>
+        <li>Co-marketing launch</li>
+        <li>Hackathon participation</li>
+        <li>Public beta open</li>
+      </ul>
+      <span class="pill pill-violet" style="margin-top:12px;font-size:10px;">Planned</span>
+    </div>
+    <div class="phase-card q3">
+      <div class="phase-label">Phase 3 · Q1 2027</div>
+      <div class="phase-title">Scale & Expand</div>
+      <ul class="phase-items">
+        <li>Mobile app iOS / Android</li>
+        <li>Multichain bridge integration</li>
+        <li>Enterprise client onboarding</li>
+        <li>Advanced AI features</li>
+        <li>Regional expansion LATAM/SEA</li>
+        <li>Flash loan module live</li>
+      </ul>
+      <span class="pill pill-cyan" style="margin-top:12px;font-size:10px;">Planned</span>
+    </div>
+    <div class="phase-card q4">
+      <div class="phase-label">Phase 4 · Q2–Q4 2027</div>
+      <div class="phase-title">Global Platform</div>
+      <ul class="phase-items">
+        <li>Global merchant network</li>
+        <li>BOT Chain as hub settlement</li>
+        <li>Institutional B2B rails</li>
+        <li>On-chain AI reputation</li>
+        <li>Protocol governance layer</li>
+        <li>Ecosystem fund launch</li>
+      </ul>
+      <span class="pill pill-gold" style="margin-top:12px;font-size:10px;">Vision</span>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-14" style="display:none"><strong>Speaker Notes — Slide 14 · Roadmap:</strong> Key message: "Phase 2 is entirely dependent on this partnership. BOT Chain is the unlock, not the afterthought." Phase 4 is aspirational but grounded — BOT Chain as the settlement hub in a spoke-and-hub model is a genuinely compelling long-term strategic position.</div>
+
+<!-- SLIDE 15 · METRICS -->
+<section class="slide" id="slide-15" data-title="Current Metrics">
+  <span class="slide-num">15 / 20</span>
+  <div class="slide-label">Honest Metrics</div>
+  <h2>Current Status & <span class="gradient-text">Future Milestones</span></h2>
+  <div class="divider"></div>
+  <div class="two-col" style="margin-top:20px;gap:22px;flex:1;align-items:start;">
+    <div>
+      <p style="font-size:12px;color:var(--text-secondary);font-weight:500;margin-bottom:11px;">Current State — <span class="gold-text">Honest Disclosure</span></p>
+      <div class="card-grid cg2" style="gap:9px;">
+        <div class="metric-card"><div class="mval gradient-text">MVP</div><div class="mlbl">Product Stage</div></div>
+        <div class="metric-card"><div class="mval" style="font-size:15px;color:var(--accent-gold);">Pre-Launch</div><div class="mlbl">MAU / Users</div></div>
+        <div class="metric-card"><div class="mval" style="font-size:15px;color:var(--accent-gold);">Pre-Launch</div><div class="mlbl">Wallets Created</div></div>
+        <div class="metric-card"><div class="mval" style="font-size:15px;color:var(--accent-gold);">Pre-Launch</div><div class="mlbl">Transaction Volume</div></div>
+        <div class="metric-card"><div class="mval" style="font-size:15px;color:var(--accent-gold);">None Yet</div><div class="mlbl">Live dApps</div></div>
+        <div class="metric-card"><div class="mval" style="font-size:15px;color:var(--accent-cyan);">In Discussion</div><div class="mlbl">Partnerships</div></div>
+      </div>
+      <div class="highlight-strip" style="margin-top:11px;background:rgba(255,209,102,.05);border-color:rgba(255,209,102,.2);">
+        <div class="icon">⚠️</div>
+        <p><strong style="color:var(--accent-gold);">Transparency First:</strong> We do not fabricate metrics. What we have is a working MVP, a clear technical architecture, and a serious deployment roadmap. Our value is potential — not pretended traction.</p>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:12px;color:var(--text-secondary);font-weight:500;margin-bottom:11px;">Post-Partnership Milestones</p>
+      <div class="timeline" style="gap:0;">
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:rgba(79,157,255,.15);border-color:var(--accent-blue);font-size:11px;width:32px;height:32px;">M1</div>
+          <div class="timeline-content"><h4 style="font-size:13px;">BOT Chain Testnet Live</h4><p>Smart contracts deployed. End-to-end payment flow verified on testnet with full explorer verification.</p></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:rgba(155,135,245,.15);border-color:var(--accent-violet);font-size:11px;width:32px;height:32px;">M2</div>
+          <div class="timeline-content"><h4 style="font-size:13px;">First 100 Merchant Wallets</h4><p>Merchant onboarding program generates 100 active wallets on BOT Chain mainnet.</p></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:rgba(0,212,255,.15);border-color:var(--accent-cyan);font-size:11px;width:32px;height:32px;">M3</div>
+          <div class="timeline-content"><h4 style="font-size:13px;">SDK v1.0 Developer Release</h4><p>Public SDK with full docs. BOT Chain featured as primary chain in all onboarding materials.</p></div>
+        </div>
+        <div class="timeline-item" style="padding-bottom:0;">
+          <div class="timeline-dot" style="background:rgba(255,209,102,.15);border-color:var(--accent-gold);font-size:11px;width:32px;height:32px;">M4</div>
+          <div class="timeline-content" style="padding-bottom:0;"><h4 style="font-size:13px;">First Hackathon on BOT Chain</h4><p>Co-hosted hackathon. Global Pay API as payment infrastructure for all participating projects.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-15" style="display:none"><strong>Speaker Notes — Slide 15 · Metrics:</strong> Lead with transparency: "We're not here with fake metrics. We have a real product, a real plan, and a real ask." The milestones on the right are commitments — we want BOT Chain's support to achieve them. Pre-launch teams that over-represent metrics lose all credibility with serious ecosystem teams.</div>
+
+<!-- SLIDE 16 · PARTNERSHIP OPPORTUNITIES -->
+<section class="slide" id="slide-16" data-title="Partnership Opportunities">
+  <span class="slide-num">16 / 20</span>
+  <div class="slide-label">Partnership Framework</div>
+  <h2>Partnership <span class="gradient-text">Opportunities</span></h2>
+  <div class="divider"></div>
+  <div class="card-grid cg3" style="margin-top:18px;gap:12px;flex:1;">
+    <div class="partner-item"><div class="partner-icon">🚀</div><div class="partner-info"><h4>Deployment Support</h4><p>Technical assistance from BOT Chain's core team for smart contract deployment, RPC configuration, testnet access, and mainnet launch checklist completion.</p></div></div>
+    <div class="partner-item"><div class="partner-icon">💰</div><div class="partner-info"><h4>Grant Program</h4><p>Ecosystem grant to fund development of BOT Chain-native features, SDK extension, and documentation — accelerating time-to-production on BOT Chain.</p></div></div>
+    <div class="partner-item"><div class="partner-icon">⛽</div><div class="partner-info"><h4>Gas Rebate Program</h4><p>Gas rebate credits for the early user acquisition phase — enabling gasless UX for the first cohort of merchants and users without economic friction at launch.</p></div></div>
+    <div class="partner-item"><div class="partner-icon">📣</div><div class="partner-info"><h4>Co-Marketing & Announcements</h4><p>Joint press releases, social media campaigns, and co-branded ecosystem announcements to amplify reach across both Global Pay and BOT Chain communities.</p></div></div>
+    <div class="partner-item"><div class="partner-icon">🏆</div><div class="partner-info"><h4>Hackathon Collaboration</h4><p>Co-host or co-sponsor BOT Chain hackathons. Global Pay provides APIs, prizes, and mentoring. BOT Chain gains payment-native dApp submissions from every team.</p></div></div>
+    <div class="partner-item"><div class="partner-icon">🎓</div><div class="partner-info"><h4>Developer Workshops</h4><p>Joint developer workshops — online and offline — positioning BOT Chain + Global Pay as the go-to stack for Web3 fintech. Drives simultaneous ecosystem developer growth.</p></div></div>
+    <div class="partner-item"><div class="partner-icon">🛠️</div><div class="partner-info"><h4>Technical Collaboration</h4><p>Shared engineering sessions for wallet integration, bridge architecture, and performance optimisation. Deep protocol-level collaboration, not surface-level partnership.</p></div></div>
+    <div class="partner-item"><div class="partner-icon">🏢</div><div class="partner-info"><h4>Enterprise Onboarding</h4><p>Joint enterprise outreach — Global Pay brings fintech enterprise clients to BOT Chain, expanding institutional presence and use-case diversity on the chain.</p></div></div>
+    <div class="partner-item"><div class="partner-icon">🌍</div><div class="partner-info"><h4>Community Campaigns</h4><p>Coordinated community campaigns on Twitter/X, Telegram, Discord, and LinkedIn — driving community crossover, shared brand equity, and ecosystem narrative.</p></div></div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-16" style="display:none"><strong>Speaker Notes — Slide 16 · Partnership Opportunities:</strong> Present this as a starting point for discussion, not a fixed demand. "We've outlined nine partnership tracks. We're not asking for all nine on day one. Align on two or three that create immediate mutual value." Deployment support and gas rebate are the minimum viable asks.</div>
+
+<!-- SLIDE 17 · COOPERATION SCOPE -->
+<section class="slide" id="slide-17" data-title="Cooperation Scope">
+  <span class="slide-num">17 / 20</span>
+  <div class="slide-label">Detailed Scope</div>
+  <h2>Cooperation <span class="gradient-text">Scope & Commitments</span></h2>
+  <div class="divider"></div>
+  <div class="two-col" style="margin-top:18px;gap:22px;flex:1;align-items:start;">
+    <div>
+      <p style="font-size:11px;color:var(--accent-cyan);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.1em;margin-bottom:11px;">Technical Cooperation</p>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="card" style="padding:13px 15px;"><h4 style="font-size:12px;margin-bottom:4px;">Infrastructure Access</h4><p style="font-size:11px;color:var(--text-secondary);">BOT Chain testnet/mainnet RPC endpoints. Explorer API for transaction verification. Node infrastructure guidance for production deployment.</p></div>
+        <div class="card" style="padding:13px 15px;"><h4 style="font-size:12px;margin-bottom:4px;">Developer APIs & SDK Integration</h4><p style="font-size:11px;color:var(--text-secondary);">BOT Chain SDK in Global Pay's developer toolkit. BOT Chain as default chain in all onboarding documentation and code tutorials.</p></div>
+        <div class="card" style="padding:13px 15px;"><h4 style="font-size:12px;margin-bottom:4px;">Wallet & Smart Contract Integration</h4><p style="font-size:11px;color:var(--text-secondary);">Joint testing of ERC-4337 account abstraction on BOT Chain. Smart contract security review with BOT Chain's technical team before mainnet.</p></div>
+        <div class="card" style="padding:13px 15px;"><h4 style="font-size:12px;margin-bottom:4px;">Bridge & Token Standards</h4><p style="font-size:11px;color:var(--text-secondary);">Alignment on pUSDC token standard compatibility with BOT Chain's native token standards. Bridge architecture review for cross-chain settlement routes.</p></div>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:11px;color:var(--accent-violet);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.1em;margin-bottom:11px;">Marketing & Community</p>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="card" style="padding:13px 15px;"><h4 style="font-size:12px;margin-bottom:4px;">Joint Announcements</h4><p style="font-size:11px;color:var(--text-secondary);">Official ecosystem partnership press release. BOT Chain ecosystem page listing. Global Pay featured in BOT Chain's quarterly partner updates.</p></div>
+        <div class="card" style="padding:13px 15px;"><h4 style="font-size:12px;margin-bottom:4px;">Community Integration</h4><p style="font-size:11px;color:var(--text-secondary);">Global Pay team presence in BOT Chain's developer Discord and Telegram. Coordinated AMAs, Twitter Spaces, and community events.</p></div>
+        <div class="card" style="padding:13px 15px;"><h4 style="font-size:12px;margin-bottom:4px;">Milestone-Based Incentives</h4><p style="font-size:11px;color:var(--text-secondary);">Gas rebates, grant tranches, and co-marketing budget unlocked as we hit verified on-chain and product milestones. Accountability built into the structure.</p></div>
+        <div class="card" style="padding:13px 15px;"><h4 style="font-size:12px;margin-bottom:4px;">Long-Term Ecosystem Commitment</h4><p style="font-size:11px;color:var(--text-secondary);">As Global Pay expands to new markets and verticals, BOT Chain remains the primary blockchain settlement layer throughout all phases of growth.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-17" style="display:none"><strong>Speaker Notes — Slide 17 · Cooperation Scope:</strong> Differentiate what we're asking from what we're committing in return. This slide proves we've thought the partnership through — it's not just "give us a grant." Milestone-based incentives signal accountability: we earn support by hitting verifiable targets, not just signing an MOU.</div>
+
+<!-- SLIDE 18 · WHY PARTNER WITH GLOBAL PAY -->
+<section class="slide" id="slide-18" data-title="Why Partner With Global Pay">
+  <span class="slide-num">18 / 20</span>
+  <div class="slide-label">The Partnership Case</div>
+  <h2>Why Partner With <span class="gradient-text">Global Pay</span></h2>
+  <div class="divider"></div>
+  <div style="margin-top:18px;flex:1;display:flex;flex-direction:column;gap:14px;">
+    <div class="card-grid cg2" style="gap:12px;">
+      <div class="partner-item"><div class="partner-icon">🏗️</div><div class="partner-info"><h4>Infrastructure-Grade Quality</h4><p>Global Pay is built as infrastructure, not a consumer product. This means stability, reliability, and scalability commitments that ecosystem-level partnerships require and depend on.</p></div></div>
+      <div class="partner-item"><div class="partner-icon">🧠</div><div class="partner-info"><h4>AI-First Differentiation</h4><p>No other payment project on BOT Chain brings a fully integrated AI layer. Global Pay makes BOT Chain the only blockchain with an AI-native payment infrastructure partner.</p></div></div>
+      <div class="partner-item"><div class="partner-icon">🌐</div><div class="partner-info"><h4>Real-World Fintech Bridge</h4><p>Global Pay bridges traditional fiat finance with BOT Chain — the bridge most chains desperately need but rarely get. Real-world merchant adoption, not DeFi-only.</p></div></div>
+      <div class="partner-item"><div class="partner-icon">📈</div><div class="partner-info"><h4>Long-Term Ecosystem Commitment</h4><p>We're not chain-hopping. BOT Chain is our primary deployment target. Our roadmap, documentation, and GTM strategy are built around BOT Chain's ecosystem growth trajectory.</p></div></div>
+    </div>
+    <div class="glow-box">
+      <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:space-around;">
+        <div class="big-stat"><div class="num">AI</div><div class="desc">Powered Payments</div></div>
+        <div class="big-stat"><div class="num">EVM</div><div class="desc">Native Contracts</div></div>
+        <div class="big-stat"><div class="num">Fiat</div><div class="desc">↔ Crypto Bridge</div></div>
+        <div class="big-stat"><div class="num">AA</div><div class="desc">Gasless UX ERC-4337</div></div>
+        <div class="big-stat"><div class="num">B2C+B2B</div><div class="desc">Payment Coverage</div></div>
+      </div>
+    </div>
+    <div class="quote-block">"Global Pay represents what every Layer-1 and Layer-2 ecosystem needs but rarely finds — a payment team building infrastructure, not promises. A real product with a real plan and a long-term commitment to one chain."</div>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-18" style="display:none"><strong>Speaker Notes — Slide 18 · Why Partner:</strong> Emotional close before the CTA. Hit four points with conviction: (1) Infrastructure vs. app — we're a layer, not a project. (2) AI-first — genuinely unique in this space. (3) Fiat bridge — solves BOT Chain's biggest adoption barrier. (4) Commitment — we're here to build, not collect a logo. End with the quote — let it breathe.</div>
+
+<!-- SLIDE 19 · CALL TO ACTION -->
+<section class="slide" id="slide-19" data-title="Call to Action">
+  <span class="slide-num">19 / 20</span>
+  <div class="slide-label">Next Steps</div>
+  <h2>What We're <span class="gradient-text">Asking For</span></h2>
+  <div class="divider"></div>
+  <p class="lead" style="margin-top:8px;font-size:14px;">We're requesting formal ecosystem partnership onboarding with the following specific supports:</p>
+  <div class="cta-grid">
+    <div class="cta-item"><div class="emoji">🚀</div><h4>Deployment Assistance</h4><p>Technical support from BOT Chain's engineering team during testnet and mainnet deployment — RPC access, contract review, and launch checklist guidance.</p></div>
+    <div class="cta-item"><div class="emoji">🛠️</div><h4>Technical Guidance</h4><p>Access to BOT Chain's developer relations team for ongoing technical questions, integration best practices, and ecosystem tooling recommendations.</p></div>
+    <div class="cta-item"><div class="emoji">📣</div><h4>Co-Marketing</h4><p>Joint announcement of the partnership. Co-branded content across BOT Chain's and Global Pay's channels at mainnet launch milestone.</p></div>
+    <div class="cta-item"><div class="emoji">💰</div><h4>Grant Opportunities</h4><p>Application to BOT Chain's ecosystem grant program to fund BOT Chain-specific development, SDK creation, and documentation sprint.</p></div>
+    <div class="cta-item"><div class="emoji">🏁</div><h4>Milestone Incentives</h4><p>Milestone-based reward structure — gas rebates, additional grants, and co-marketing budget unlocked against verified on-chain and product milestones.</p></div>
+    <div class="cta-item"><div class="emoji">👩‍💻</div><h4>Developer Ecosystem Support</h4><p>Introduction to BOT Chain's developer community, hackathon participation, and joint workshop programming beginning in Q4 2026.</p></div>
+  </div>
+  <div class="highlight-strip" style="margin-top:14px;">
+    <div class="icon">🤝</div>
+    <p><strong>Proposed First Step:</strong> A technical alignment call with BOT Chain's ecosystem and engineering teams to scope the integration plan, confirm testnet access, and align on milestone targets — this week.</p>
+  </div>
+  <div class="slide-footer"><span>Global Pay — BOT Chain Partnership</span><span>Pre-Launch / MVP · Confidential</span></div>
+</section>
+<div class="slide-notes" id="notes-19" style="display:none"><strong>Speaker Notes — Slide 19 · CTA:</strong> Be specific and direct — ecosystem teams appreciate clarity. "The minimum viable ask to start is items 1, 2, and 3 — deployment assistance, technical guidance, and a joint announcement. Everything else we earn as we hit milestones." The 'proposed first step' is the immediate close — ask for the call, not the full partnership, in this meeting.</div>
+
+<!-- SLIDE 20 · THANK YOU -->
+<section class="slide" id="slide-20" data-title="Thank You">
+  <span class="slide-num">20 / 20</span>
+  <div class="ty-center">
+    <div class="cover-logo" style="margin-bottom:6px;">🌍</div>
+    <div class="slide-label">Global Pay × BOT Chain</div>
+    <div class="ty-tagline">"Let's build the future of<br /><span class="gradient-text">AI-powered payments</span><br />together on BOT Chain."</div>
+    <div class="divider" style="margin:14px auto;"></div>
+    <div class="ty-contact-grid">
+      <div class="ty-chip"><span>🌐</span><span>globalpay.io <span style="color:var(--text-muted);font-size:11px;">(placeholder)</span></span></div>
+      <div class="ty-chip"><span>✉️</span><span>partnerships@globalpay.io <span style="color:var(--text-muted);font-size:11px;">(placeholder)</span></span></div>
+      <div class="ty-chip"><span>🐦</span><span>@GlobalPayWeb3 <span style="color:var(--text-muted);font-size:11px;">(placeholder)</span></span></div>
+      <div class="ty-chip"><span>💬</span><span>Telegram: @GlobalPayTeam <span style="color:var(--text-muted);font-size:11px;">(placeholder)</span></span></div>
+    </div>
+    <div style="margin-top:22px;display:flex;gap:9px;flex-wrap:wrap;justify-content:center;">
+      <span class="pill pill-gold">Pre-Launch / MVP</span>
+      <span class="pill pill-blue">AI-Powered</span>
+      <span class="pill pill-violet">Blockchain Native</span>
+      <span class="pill pill-cyan">BOT Chain Ready</span>
+      <span class="pill pill-teal">July 2026</span>
+    </div>
+    <p style="margin-top:22px;font-size:12px;color:var(--text-muted);max-width:480px;text-align:center;line-height:1.7;">This document is confidential and prepared exclusively for the BOT Chain Ecosystem Partnership Team. All metrics are accurately represented. No statistics have been fabricated.</p>
+  </div>
+</section>
+<div class="slide-notes" id="notes-20" style="display:none"><strong>Speaker Notes — Slide 20 · Thank You:</strong> Land the closing line verbatim — slowly, with conviction: "Let's build the future of AI-powered payments together on BOT Chain." Then go silent for a beat. Open for questions. Have the integration timeline and grant application details ready as follow-up. The goal of this meeting is a technical alignment call — close on that specific next step.</div>
+
+</div><!-- /slides-viewport -->
+
+<div class="notes-display" id="notesDisplay">
+  <div class="notes-inner">
+    <div class="notes-hdr">📝 Speaker Notes</div>
+    <div id="notesContent"></div>
+  </div>
+</div>
+</div><!-- /presentation -->
+
+<div class="key-hint">← → Arrow keys to navigate · N for notes · S for slide panel</div>
+
+<script>
+  let current = 1;
+  const TOTAL = 20;
+  let notesVisible = false;
+  let thumbOpen = false;
+
+  const slideLabels = [
+    "Cover","Executive Summary","The Problem","The Solution",
+    "Market Opportunity","Product Walkthrough","Technical Architecture",
+    "AI Capabilities","Blockchain Integration","Why BOT Chain",
+    "Integration Plan","Value to BOT Chain","Business Model",
+    "Roadmap","Current Metrics","Partnership Opportunities",
+    "Cooperation Scope","Why Partner","Call to Action","Thank You"
+  ];
+
+  const thumbNav = document.getElementById('thumbNav');
+  slideLabels.forEach((t, i) => {
+    const el = document.createElement('div');
+    el.className = 'thumb-item' + (i === 0 ? ' active' : '');
+    el.id = 'thumb-' + (i + 1);
+    el.innerHTML = '<span class="thumb-num">' + String(i+1).padStart(2,'0') + '</span><span class="thumb-title">' + t + '</span>';
+    el.onclick = () => goTo(i + 1);
+    thumbNav.appendChild(el);
+  });
+
+  function goTo(n) {
+    if (n < 1 || n > TOTAL) return;
+    document.getElementById('slide-' + current).classList.remove('active');
+    const ot = document.getElementById('thumb-' + current);
+    if (ot) ot.classList.remove('active');
+    current = n;
+    document.getElementById('slide-' + current).classList.add('active');
+    const nt = document.getElementById('thumb-' + current);
+    if (nt) { nt.classList.add('active'); nt.scrollIntoView({block:'nearest'}); }
+    document.getElementById('counter').textContent = current + ' / ' + TOTAL;
+    document.getElementById('progressBar').style.width = ((current / TOTAL) * 100) + '%';
+    if (notesVisible) updateNotes();
+    try { mermaid.run(); } catch(e) {}
+  }
+
+  function nextSlide() { goTo(current + 1); }
+  function prevSlide() { goTo(current - 1); }
+
+  function toggleNotes() {
+    notesVisible = !notesVisible;
+    const d = document.getElementById('notesDisplay');
+    d.style.display = notesVisible ? 'block' : 'none';
+    if (notesVisible) updateNotes();
+  }
+
+  function updateNotes() {
+    const n = document.getElementById('notes-' + current);
+    document.getElementById('notesContent').innerHTML = n ? n.innerHTML : '—';
+  }
+
+  function toggleThumb() {
+    thumbOpen = !thumbOpen;
+    document.getElementById('thumbNav').classList.toggle('open', thumbOpen);
+    document.getElementById('slidesViewport').style.marginLeft = thumbOpen ? '185px' : '0';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (['ArrowRight','ArrowDown',' '].includes(e.key)) { e.preventDefault(); nextSlide(); }
+    if (['ArrowLeft','ArrowUp'].includes(e.key)) { e.preventDefault(); prevSlide(); }
+    if (e.key === 'n' || e.key === 'N') toggleNotes();
+    if (e.key === 's' || e.key === 'S') toggleThumb();
+  });
+
+  const mermaidConfig = {
+    startOnLoad: false,
+    suppressErrorRendering: true,
+    theme: 'dark',
+    themeVariables: {
+      primaryColor: '#0d1b2e', primaryTextColor: '#F0F4FF',
+      primaryBorderColor: '#4F9DFF', lineColor: '#4F9DFF',
+      secondaryColor: '#1a0d2e', tertiaryColor: '#0d1f1e',
+      background: '#050811', nodeBorder: '#4F9DFF',
+      clusterBkg: '#0d1b2e', titleColor: '#F0F4FF',
+      edgeLabelBackground: '#0d1b2e',
+      fontFamily: 'Inter, sans-serif', fontSize: '12px',
+    },
+    gantt: {
+      titleTopMargin: 18, barHeight: 16, barGap: 3,
+      topPadding: 45, leftPadding: 115, gridLineStartPadding: 30,
+      fontSize: 11, sectionFontSize: 11, numberSectionStyles: 4,
+    }
+  };
+  mermaid.initialize(mermaidConfig);
+
+  // Render all mermaid diagrams on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      try { mermaid.run({ querySelector: '.mermaid' }); } catch(e) { console.warn('Mermaid init:', e); }
+    }, 400);
+  });
+
+  // Also render after any goTo navigation (for diagrams on hidden slides)
+  const _origGoTo = goTo;
+  function goTo(n) {
+    if (n < 1 || n > TOTAL) return;
+    document.getElementById('slide-' + current).classList.remove('active');
+    const ot = document.getElementById('thumb-' + current);
+    if (ot) ot.classList.remove('active');
+    current = n;
+    document.getElementById('slide-' + current).classList.add('active');
+    const nt = document.getElementById('thumb-' + current);
+    if (nt) { nt.classList.add('active'); nt.scrollIntoView({block:'nearest'}); }
+    document.getElementById('counter').textContent = current + ' / ' + TOTAL;
+    document.getElementById('progressBar').style.width = ((current / TOTAL) * 100) + '%';
+    if (notesVisible) updateNotes();
+    // Re-render any unprocessed mermaid diagrams in the newly visible slide
+    setTimeout(() => {
+      const slide = document.getElementById('slide-' + current);
+      const unprocessed = slide.querySelectorAll('.mermaid:not([data-processed])');
+      if (unprocessed.length > 0) {
+        try { mermaid.run({ nodes: Array.from(unprocessed) }); } catch(e) {}
+      }
+    }, 100);
+  }
+</script>
+</body>
+</html>
