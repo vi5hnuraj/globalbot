@@ -25,25 +25,25 @@ const Payements = () => {
     const inactiveClass = "bg-zinc-900/50 text-zinc-400 border-zinc-800 hover:bg-zinc-800 hover:text-white";
 
     return (
-        <div className='flex flex-col bg-black w-full text-white border-t border-zinc-800 h-screen overflow-y-auto'>
-            <div className='w-full max-w-4xl mx-auto flex flex-wrap px-4 sm:px-8 py-6 sm:py-8 gap-3 sm:gap-6 text-[10px] sm:text-sm font-bold uppercase tracking-widest'>
+        <div className='flex flex-col bg-black w-full text-white border-t border-zinc-800 min-h-screen overflow-y-auto'>
+            <div className='w-full max-w-4xl mx-auto flex px-3 sm:px-8 py-4 sm:py-8 gap-2 sm:gap-6 text-[10px] sm:text-sm font-bold uppercase tracking-widest'>
                 <div 
                     onClick={() => toggleHandler("pay")} 
-                    className={`w-full flex justify-center border p-4 rounded-2xl transition-all cursor-pointer ${active === "pay" ? activeClass : inactiveClass}`}
+                    className={`flex-1 sm:flex-none flex justify-center border px-3 sm:px-6 py-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all cursor-pointer whitespace-nowrap ${active === "pay" ? activeClass : inactiveClass}`}
                 >
                     Pay
                 </div>
                 <div 
                     onClick={() => toggleHandler("send-request")} 
-                    className={`w-full flex justify-center border p-4 rounded-2xl transition-all cursor-pointer ${active === "send-request" ? activeClass : inactiveClass}`}
+                    className={`flex-1 sm:flex-none flex justify-center border px-3 sm:px-6 py-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all cursor-pointer whitespace-nowrap ${active === "send-request" ? activeClass : inactiveClass}`}
                 >
-                    Request Money
+                    Request
                 </div>
                 <div 
                     onClick={() => toggleHandler("reqpay")} 
-                    className={`w-full flex justify-center border p-4 rounded-2xl transition-all cursor-pointer ${active === "reqpay" ? activeClass : inactiveClass}`}
+                    className={`flex-1 sm:flex-none flex justify-center border px-3 sm:px-6 py-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all cursor-pointer whitespace-nowrap ${active === "reqpay" ? activeClass : inactiveClass}`}
                 >
-                    Inbox (Reqpay)
+                    Inbox
                 </div>
             </div>
             <div className='h-full flex justify-center px-4'>

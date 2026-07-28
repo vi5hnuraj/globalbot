@@ -63,7 +63,7 @@ const RequestForm = () => {
   };
 
   return (
-    <div className="relative bg-[#0c0c0c]/80 backdrop-blur-xl border border-zinc-800/60 rounded-[2rem] p-8 shadow-2xl overflow-hidden group max-w-xl mx-auto">
+    <div className="relative bg-[#0c0c0c]/80 backdrop-blur-xl border border-zinc-800/60 rounded-[2rem] p-5 sm:p-8 shadow-2xl overflow-hidden group max-w-xl mx-auto">
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-all duration-700 pointer-events-none" />
 
@@ -71,8 +71,8 @@ const RequestForm = () => {
         {/* Header */}
         <div className="flex items-center justify-between pb-4 border-b border-zinc-800/60">
           <div>
-            <h3 className="text-xl font-bold text-white tracking-wide">Request Money</h3>
-            <p className="text-zinc-500 text-xs mt-0.5 font-medium">Create a secure USD invoice for customer settlement</p>
+            <h3 className="text-lg sm:text-xl font-bold text-white tracking-wide">Request Money</h3>
+            <p className="text-zinc-500 text-[11px] sm:text-xs mt-0.5 font-medium">Create a secure USD invoice</p>
           </div>
           <div className="w-10 h-10 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
             <FiZap size={18} />

@@ -138,9 +138,9 @@ const Request = () => {
   }
 
   return (
-    <div className="h-screen w-full bg-black text-white p-5 border-t border-zinc-800">
-      <div className="mb-6 max-w-4xl mx-auto flex items-center justify-between">
-        <h2 className="text-xl font-bold text-white tracking-wide">Inbox</h2>
+    <div className="min-h-screen w-full bg-black text-white p-3 sm:p-5 border-t border-zinc-800">
+      <div className="mb-4 sm:mb-6 max-w-4xl mx-auto flex items-center justify-between">
+        <h2 className="text-lg sm:text-xl font-bold text-white tracking-wide">Inbox</h2>
       </div>
       <div className="max-w-4xl mx-auto space-y-4">
         {data.length === 0 ? (
