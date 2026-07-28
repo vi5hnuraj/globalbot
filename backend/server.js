@@ -39,14 +39,28 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false
 }));
 
-// ✅ CORS Middleware — origins from environment or localhost defaults
-const allowedOrigins = process.env.CORS_ORIGINS
-  ? process.env.CORS_ORIGINS.split(',')
-  : ['http://localhost:5173', 'http://localhost:5174'];
+// ✅ CORS Middleware — origins from environment
+const allowedOrigins = (() => {
+  const origins = new Set(['http://localhost:5173', 'http://localhost:5174']);
+  if (process.env.CORS_ORIGINS) {
+    process.env.CORS_ORIGINS.split(',').forEach(o => origins.add(o.trim()));
+  }
+  if (process.env.FRONTEND_URL) {
+    process.env.FRONTEND_URL.split(',').forEach(o => origins.add(o.trim()));
+  }
+  return [...origins];
+})();
 
 app.use(cors({
-  origin: allowedOrigins,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, server-to-server)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    callback(new Error('Not allowed by CORS'));
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
 }));
 
